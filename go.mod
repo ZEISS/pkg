@@ -11,6 +11,7 @@ require (
 	github.com/stretchr/testify v1.9.0
 	go.uber.org/zap v1.24.0
 	golang.org/x/mod v0.15.0
+	gorm.io/gorm v1.25.11
 	helm.sh/helm v2.17.0+incompatible
 	mvdan.cc/gofumpt v0.6.0
 )
@@ -95,6 +96,8 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jgautheron/goconst v1.7.0 // indirect
 	github.com/jingyugao/rowserrcheck v1.1.1 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/jirfag/go-printf-func-name v0.0.0-20200119135958-7558a9eaa5af // indirect
 	github.com/jjti/go-spancheck v0.5.2 // indirect
 	github.com/julz/importas v0.1.0 // indirect
