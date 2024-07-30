@@ -9,6 +9,10 @@ GO_MOD 			?= $(shell ${GO} list -m)
 # Module name
 MODULE_NAME ?= github.com/katallaxie/template-go
 
+.PHONY: release
+release: ## Release the project.
+	$(GO_RELEASER) release --clean
+
 .PHONY: build
 build: ## Build the binary file.
 	$(GO_RELEASER) build --snapshot --clean

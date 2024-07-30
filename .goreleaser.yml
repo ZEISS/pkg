@@ -9,18 +9,8 @@ release:
     
     Welcome to this new release! We hope you enjoy the changes we've made.
 changelog:
-  groups:
-    - title: Features
-      regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
-      order: 0
-    - title: "Bug fixes"
-      regexp: '^.*?bug(\([[:word:]]+\))??!?:.+$'
-      order: 1
-    - title: Others
-      order: 999
   sort: asc
   filters:
     exclude:
-      - "^docs:"
-      - typo
-      - (?i)foo
+    - '^docs:'
+    - '^test:'
