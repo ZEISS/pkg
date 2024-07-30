@@ -4,3 +4,8 @@ package cast
 func Ptr[T any](val T) *T {
 	return &val
 }
+
+// Value returns the value of the pointer.
+func Value[T any](val *T) T {
+	return *val
+}
