@@ -24,20 +24,20 @@ type ReadyFunc func()
 // to the server.
 type RunFunc func(func() error)
 
-// ServeError ...
-type ServeError struct {
+// ServerError ...
+type ServerError struct {
 	Err error
 }
 
 // Error implements the error interface.
-func (s *ServeError) Error() string { return fmt.Sprintf("server: %s", s.Err) }
+func (s *ServerError) Error() string { return fmt.Sprintf("server: %s", s.Err) }
 
 // Unwrap ...
-func (s *ServeError) Unwrap() error { return s.Err }
+func (s *ServerError) Unwrap() error { return s.Err }
 
-// NewServer returns a new error.
-func NewServer(err error) *ServeError {
-	return &ServeError{Err: err}
+// NewServerError returns a new error.
+func NewServerError(err error) *ServerError {
+	return &ServerError{Err: err}
 }
 
 // Server is the interface to be implemented
@@ -142,7 +142,7 @@ func (s *server) Wait() error {
 	defer signal.Reset(syscall.SIGINT, syscall.SIGTERM)
 
 OUTTER:
-	// start all listeners in order
+	//
 	for l, ready := range s.listeners {
 		readyFunc := func() {
 			r := ready
@@ -155,13 +155,10 @@ OUTTER:
 			})
 		}
 
-		goFn := func(f func() error) { _ = s.run(f) }
+		goFn := func(f func() error) { s.run(f) }
 
 		// schedule to routines
-		err := s.run(l.Start(s.ctx, readyFunc, goFn))
-		if err != nil {
-			return err
-		}
+		s.run(l.Start(s.ctx, readyFunc, goFn))
 
 		// this blocks until ready is called
 		if ready {
@@ -177,7 +174,6 @@ OUTTER:
 		}
 	}
 
-	// this is the main loop
 	for {
 		select {
 		case <-ticker.C:
@@ -186,8 +182,8 @@ OUTTER:
 			// cancel the context of the routines
 			s.cancel()
 		case <-s.ctx.Done():
-			if err := s.ctx.Err(); err != nil {
-				return NewServer(s.err)
+			if s.err != nil {
+				return s.err
 			}
 
 			return nil
@@ -209,7 +205,7 @@ func (s *server) SetLimit(n int) {
 	s.sem = make(chan token, n)
 }
 
-func (s *server) run(f func() error) error {
+func (s *server) run(f func() error) {
 	if s.sem != nil {
 		s.sem <- token{}
 	}
@@ -230,8 +226,6 @@ func (s *server) run(f func() error) error {
 	}
 
 	go fn()
-
-	return nil
 }
 
 func (s *server) done() {
