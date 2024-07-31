@@ -8,6 +8,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/golang/mock v1.6.0
 	github.com/golangci/golangci-lint v1.59.1
+	github.com/openfga/go-sdk v0.5.0
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.9.0
 	go.uber.org/zap v1.27.0
