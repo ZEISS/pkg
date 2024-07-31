@@ -2,8 +2,6 @@ module github.com/zeiss/pkg
 
 go 1.22.0
 
-toolchain go1.22.5
-
 require (
 	github.com/golang/mock v1.6.0
 	github.com/golangci/golangci-lint v1.59.1
