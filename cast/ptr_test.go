@@ -3,8 +3,9 @@ package cast_test
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/zeiss/pkg/cast"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestPtr(t *testing.T) {
