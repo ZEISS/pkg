@@ -25,11 +25,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: ./go.mod
+      - run: make generate
       - run: make test
       - uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: Go Test Results
+          name: Go ${{ matrix.go-version }} Test Results
           path: .test/reports/**-test.xml
           reporter: java-junit
           fail-on-error: "true"
