@@ -1,6 +1,6 @@
 # Pkg
 
-![Github Action](https://github.com/zeiss/pkg/workflows/main/badge.svg)
+[![Test & Lint](https://github.com/ZEISS/pkg/actions/workflows/main.yml/badge.svg)](https://github.com/ZEISS/pkg/actions/workflows/main.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/zeiss/pkg.svg)](https://pkg.go.dev/github.com/zeiss/pkg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/zeiss/pkg)](https://goreportcard.com/report/github.com/zeiss/pkg)
 [![Taylor Swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
