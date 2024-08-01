@@ -25,6 +25,7 @@ func String(val any) string {
 }
 
 // Bool returns the boolean representation of the value.
+// nolint:gocyclo
 func Bool(val any) bool {
 	switch val := val.(type) {
 	case bool:
