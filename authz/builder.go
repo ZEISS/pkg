@@ -223,3 +223,10 @@ func Join(sep string, entities ...string) Stringer {
 		return strings.Join(entities, sep)
 	}
 }
+
+// String returns the string representation of the entity.
+func String(s string) Stringer {
+	return func() string {
+		return s
+	}
+}
