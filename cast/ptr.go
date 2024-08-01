@@ -7,5 +7,9 @@ func Ptr[T any](val T) *T {
 
 // Value returns the value of the pointer.
 func Value[T any](val *T) T {
+	if val == nil {
+		return Zero[T]()
+	}
+
 	return *val
 }
