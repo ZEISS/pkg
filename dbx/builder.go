@@ -92,8 +92,10 @@ func (d *databaseImpl[R, W]) ReadWriteTx(ctx context.Context, fn func(context.Co
 		return err
 	}
 
-	if err := fn(ctx, rwtx); err != nil {
+	err = fn(ctx, rwtx)
+	if err != nil {
 		tx.Rollback()
+		return NewQueryError("rollback transaction", err)
 	}
 
 	if err := tx.Commit().Error; err != nil && !errors.Is(err, sql.ErrTxDone) {
@@ -118,13 +120,10 @@ func (d *databaseImpl[R, W]) ReadTx(ctx context.Context, fn func(context.Context
 	err = fn(ctx, rtx)
 	if err != nil {
 		tx.Rollback()
+		return NewQueryError("rollback transaction", err)
 	}
 
 	if err := tx.Commit().Error; err != nil && !errors.Is(err, sql.ErrTxDone) {
-		return NewQueryError("commit read transaction", err)
-	}
-
-	if err != nil {
 		return NewQueryError("commit read transaction", err)
 	}
 
