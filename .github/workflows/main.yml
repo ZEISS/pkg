@@ -25,6 +25,8 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go }}
+          cache-dependency-path: |
+            tools/go.sum
       - run: make test
       - uses: dorny/test-reporter@v1
         if: success() || failure()
@@ -47,4 +49,6 @@ jobs:
         with:
           go-version-file: ./go.mod
           check-latest: true
+          cache-dependency-path: |
+            tools/go.sum
       - run: make lint
