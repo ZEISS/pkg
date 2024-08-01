@@ -22,7 +22,7 @@ func (s *srv) Start(ctx context.Context, ready server.ReadyFunc, run server.RunF
 		})
 
 		run(func() error {
-			ticker := time.NewTimer(5 * time.Second)
+			ticker := time.NewTimer(100 * time.Second)
 			defer ticker.Stop()
 
 			<-ticker.C
@@ -49,6 +49,7 @@ func main() {
 	s.SetLimit(3)
 
 	s.Listen(&srv{}, true)
+	s.Listen(server.NewDebug(server.WithPprof()), true)
 
 	log.Printf("starting %s", server.Service.Name())
 	serverErr := &server.ServerError{}
