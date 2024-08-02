@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/zeiss/pkg/async"
 )
 
@@ -28,7 +29,7 @@ func BenchmarkAll(b *testing.B) {
 			v, err := future.Await()
 
 			assert.NotNil(b, v)
-			assert.NoError(b, err)
+			require.NoError(b, err)
 			assert.Equal(b, []string{"hello", "world", "world"}, v)
 		}
 	})
