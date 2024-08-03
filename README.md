@@ -7,7 +7,7 @@
 [![Volkswagen](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-`pkg` is a collection of Go packages that make the life of a Go developers ZEISS easier.
+`pkg` is a collection of Go packages that make the life of a Go developers at ZEISS easier.
 
 ## Installation
 
