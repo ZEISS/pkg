@@ -8,3 +8,10 @@ func Must[T any](val T, err error) T {
 
 	return val
 }
+
+// Panic panics with the given error.
+func Panic(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
