@@ -38,7 +38,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
-          name: Test Reports
+          name: Test Report ${{ matrix.go-version }}
           path: .test/reports/**
 
   lint:
