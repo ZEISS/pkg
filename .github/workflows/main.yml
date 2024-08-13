@@ -31,14 +31,14 @@ jobs:
       - uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: Go ${{ matrix.go-version }} Test Results
+          name: Go ${{  matrix.go }} Test Results
           path: .test/reports/**-test.xml
           reporter: java-junit
           fail-on-error: "true"
       - uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
-          name: Test Report ${{ matrix.go-version }}
+          name: Test Report ${{  matrix.go }}
           path: .test/reports/**
 
   lint:
