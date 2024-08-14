@@ -378,3 +378,38 @@ func TestUnique(t *testing.T) {
 		})
 	}
 }
+
+func TestSize(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []int
+		size     int
+		expected bool
+	}{
+		{
+			name:     "empty slice",
+			input:    []int{},
+			size:     0,
+			expected: true,
+		},
+		{
+			name:     "slice with size",
+			input:    []int{1, 2, 3},
+			size:     3,
+			expected: true,
+		},
+		{
+			name:     "slice without size",
+			input:    []int{1, 2, 3},
+			size:     2,
+			expected: false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			actual := slices.Size(tt.size, tt.input...)
+			assert.Equal(t, tt.expected, actual)
+		})
+	}
+}

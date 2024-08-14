@@ -139,3 +139,8 @@ func Unique[T1 any, T2 comparable](fn func(v T1) T2, slice ...T1) []T1 {
 		return !flags[compareval]
 	}, slice...)
 }
+
+// Size checks if a slice has a specific size.
+func Size[T any](size int, slice ...T) bool {
+	return size == len(slice)
+}
