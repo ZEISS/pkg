@@ -15,3 +15,8 @@ func Panic(err error) {
 		panic(err)
 	}
 }
+
+// Empty returns true if the error is nil.
+func Empty(err error) bool {
+	return err == nil
+}
