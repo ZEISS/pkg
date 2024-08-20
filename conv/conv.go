@@ -60,6 +60,7 @@ func Bool(val any) bool {
 }
 
 // Int returns the integer representation of the value.
+// nolint:gocyclo
 func Int(val any) int {
 	switch val := val.(type) {
 	case bool:
