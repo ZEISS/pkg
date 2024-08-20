@@ -39,6 +39,14 @@ func RemoveQueryValues(s string, keys ...string) (string, error) {
 	return u.String(), nil
 }
 
+// MustRemoveQueryValues is removing values from the query string.
+func MustRemoveQueryValues(s string, keys ...string) string {
+	u, err := RemoveQueryValues(s, keys...)
+	errorx.Panic(err)
+
+	return u
+}
+
 // MustCopyValues is merging values in the query string.
 func MustCopyValues(s string, values url.Values) string {
 	u, err := CopyValues(s, values)
