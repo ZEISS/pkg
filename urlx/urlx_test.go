@@ -84,3 +84,47 @@ func TestMustCopyValues(t *testing.T) {
 		})
 	}
 }
+
+func TestRemoveQueryValues(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name     string
+		input    string
+		keys     []string
+		expected string
+	}{
+		{
+			name:     "remove value",
+			input:    "http://example.com?key=value",
+			keys:     []string{"key"},
+			expected: "http://example.com",
+		},
+		{
+			name:     "remove multiple values",
+			input:    "http://example.com?key=value&key2=value2",
+			keys:     []string{"key", "key2"},
+			expected: "http://example.com",
+		},
+		{
+			name:     "remove non-existing value",
+			input:    "http://example.com?key=value",
+			keys:     []string{"key2"},
+			expected: "http://example.com?key=value",
+		},
+		{
+			name:     "remove value from just the path",
+			input:    "/path?key=value",
+			keys:     []string{"key"},
+			expected: "/path",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			actual, err := urlx.RemoveQueryValues(tt.input, tt.keys...)
+			require.NoError(t, err)
+			assert.Equal(t, tt.expected, actual)
+		})
+	}
+}

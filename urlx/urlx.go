@@ -22,6 +22,23 @@ func CopyValues(s string, values url.Values) (string, error) {
 	return u.String(), nil
 }
 
+// RemoveQueryValues is removing values from the query string.
+func RemoveQueryValues(s string, keys ...string) (string, error) {
+	u, err := url.Parse(s)
+	if err != nil {
+		return "", err
+	}
+
+	q := u.Query()
+	for _, key := range keys {
+		q.Del(key)
+	}
+
+	u.RawQuery = q.Encode()
+
+	return u.String(), nil
+}
+
 // MustCopyValues is merging values in the query string.
 func MustCopyValues(s string, values url.Values) string {
 	u, err := CopyValues(s, values)
