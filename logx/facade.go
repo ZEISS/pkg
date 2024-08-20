@@ -1,6 +1,6 @@
 package logx
 
-// Printf ..
+// Printf ...
 func Printf(format string, args ...interface{}) {
 	LogSink.Infof(format, args...)
 }
