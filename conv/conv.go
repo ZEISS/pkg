@@ -190,3 +190,15 @@ func Int(val any) int {
 		panic("unknown type for Int()")
 	}
 }
+
+// Bytes returns the byte slice representation of the value.
+func Bytes(val any) []byte {
+	switch val := val.(type) {
+	case []byte:
+		return val
+	case string:
+		return []byte(val)
+	default:
+		return []byte(String(val))
+	}
+}

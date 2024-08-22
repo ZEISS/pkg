@@ -189,3 +189,94 @@ func TestBool(t *testing.T) {
 		})
 	}
 }
+
+func TestBytes(t *testing.T) {
+	tests := []struct {
+		name string
+		in   []byte
+		out  interface{}
+	}{
+		{
+			name: "bool",
+			in:   []byte("true"),
+			out:  true,
+		},
+		{
+			name: "int",
+			in:   []byte("1"),
+			out:  1,
+		},
+		{
+			name: "int8",
+			in:   []byte("1"),
+			out:  int8(1),
+		},
+		{
+			name: "int16",
+			in:   []byte("1"),
+			out:  int16(1),
+		},
+		{
+			name: "int32",
+			in:   []byte("1"),
+			out:  int32(1),
+		},
+		{
+			name: "int64",
+			in:   []byte("1"),
+			out:  int64(1),
+		},
+		{
+			name: "uint",
+			in:   []byte("1"),
+			out:  uint(1),
+		},
+		{
+			name: "uint8",
+			in:   []byte("1"),
+			out:  uint8(1),
+		},
+		{
+			name: "uint16",
+			in:   []byte("1"),
+			out:  uint16(1),
+		},
+		{
+			name: "uint32",
+			in:   []byte("1"),
+			out:  uint32(1),
+		},
+		{
+			name: "uint64",
+			in:   []byte("1"),
+			out:  uint64(1),
+		},
+		{
+			name: "float32",
+			in:   []byte("1.000000"),
+			out:  float32(1),
+		},
+		{
+			name: "float64",
+			in:   []byte("1.000000"),
+			out:  float64(1),
+		},
+		{
+			name: "string",
+			in:   []byte("hello"),
+			out:  "hello",
+		},
+		{
+			name: "nil",
+			in:   []byte(""),
+			out:  nil,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := conv.Bytes(tt.out)
+			assert.Equal(t, tt.in, got)
+		})
+	}
+}
