@@ -24,6 +24,16 @@ func String(val any) string {
 	}
 }
 
+// Strings returns the string slice representation of the values.
+func Strings(vals ...any) []string {
+	strs := make([]string, len(vals))
+	for i, val := range vals {
+		strs[i] = String(val)
+	}
+
+	return strs
+}
+
 // Bool returns the boolean representation of the value.
 // nolint:gocyclo
 func Bool(val any) bool {
@@ -57,6 +67,16 @@ func Bool(val any) bool {
 	default:
 		panic("unknown type for Bool()")
 	}
+}
+
+// Bools returns the boolean slice representation of the values.
+func Bools(vals ...any) []bool {
+	bools := make([]bool, len(vals))
+	for i, val := range vals {
+		bools[i] = Bool(val)
+	}
+
+	return bools
 }
 
 // Int returns the integer representation of the value.
@@ -189,6 +209,16 @@ func Int(val any) int {
 	default:
 		panic("unknown type for Int()")
 	}
+}
+
+// Ints returns the integer slice representation of the values.
+func Ints(vals ...any) []int {
+	ints := make([]int, len(vals))
+	for i, val := range vals {
+		ints[i] = Int(val)
+	}
+
+	return ints
 }
 
 // Bytes returns the byte slice representation of the value.
