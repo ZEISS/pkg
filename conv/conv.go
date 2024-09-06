@@ -25,7 +25,7 @@ func String(val any) string {
 }
 
 // Strings returns the string slice representation of the values.
-func Strings(vals ...any) []string {
+func Strings[T any](vals ...T) []string {
 	strs := make([]string, len(vals))
 	for i, val := range vals {
 		strs[i] = String(val)
@@ -70,7 +70,7 @@ func Bool(val any) bool {
 }
 
 // Bools returns the boolean slice representation of the values.
-func Bools(vals ...any) []bool {
+func Bools[T any](vals ...T) []bool {
 	bools := make([]bool, len(vals))
 	for i, val := range vals {
 		bools[i] = Bool(val)
@@ -212,7 +212,7 @@ func Int(val any) int {
 }
 
 // Ints returns the integer slice representation of the values.
-func Ints(vals ...any) []int {
+func Ints[T any](vals ...T) []int {
 	ints := make([]int, len(vals))
 	for i, val := range vals {
 		ints[i] = Int(val)
