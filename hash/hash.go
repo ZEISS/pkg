@@ -122,6 +122,7 @@ type visitOpts struct {
 
 var timeType = reflect.TypeOf(time.Time{})
 
+// nolint:gocyclo
 func (w *walker) visit(v reflect.Value, opts *visitOpts) (uint64, error) {
 	t := reflect.TypeOf(0)
 
@@ -154,11 +155,12 @@ func (w *walker) visit(v reflect.Value, opts *visitOpts) (uint64, error) {
 
 	// Binary writing can use raw ints, we have to convert to
 	// a sized-int, we'll choose the largest...
+	// nolint:exhaustive
 	switch v.Kind() {
 	case reflect.Int:
-		v = reflect.ValueOf(int64(v.Int()))
+		v = reflect.ValueOf(v.Int())
 	case reflect.Uint:
-		v = reflect.ValueOf(uint64(v.Uint()))
+		v = reflect.ValueOf(v.Uint())
 	case reflect.Bool:
 		var tmp int8
 		if v.Bool() {
@@ -177,8 +179,7 @@ func (w *walker) visit(v reflect.Value, opts *visitOpts) (uint64, error) {
 		return w.h.Sum64(), err
 	}
 
-	switch v.Type() {
-	case timeType:
+	if v.Type() == timeType {
 		w.h.Reset()
 		b, err := v.Interface().(time.Time).MarshalBinary()
 		if err != nil {
@@ -189,6 +190,7 @@ func (w *walker) visit(v reflect.Value, opts *visitOpts) (uint64, error) {
 		return w.h.Sum64(), err
 	}
 
+	// nolint:exhaustive
 	switch k {
 	case reflect.Array:
 		var h uint64
@@ -323,8 +325,7 @@ func (w *walker) visit(v reflect.Value, opts *visitOpts) (uint64, error) {
 					}
 				}
 
-				switch tag {
-				case "set":
+				if tag == "set" {
 					f |= visitFlagSet
 				}
 
