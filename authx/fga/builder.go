@@ -1,4 +1,4 @@
-package authz
+package fga
 
 import (
 	"context"
@@ -44,6 +44,19 @@ type StoreTx interface {
 	WriteTuple(context.Context, User, Object, Relation) error
 	// DeleteTuple deletes a tuple from the authz database.
 	DeleteTuple(context.Context, User, Object, Relation) error
+}
+
+// NoopStore is a store that does nothing.
+type NoopStore struct{}
+
+// Allowed checks if the user is allowed to perform the operation on the object.
+func (n *NoopStore) Allowed(context.Context, User, Object, Relation) (bool, error) {
+	return true, nil
+}
+
+// WriteTx starts a read write transaction.
+func (n *NoopStore) WriteTx(context.Context, func(context.Context, StoreTx) error) error {
+	return nil
 }
 
 // AuthzError is an error that occurred while executing a query.

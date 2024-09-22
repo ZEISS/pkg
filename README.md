@@ -60,6 +60,15 @@ fmt.Println(s) // "true"
 
 There are functions to convert `int`, `string` and `bool` values.
 
+## Operators 
+
+There is the implementation of various operators.
+
+```go
+// Is the ternary operator.
+utilx.IfElse(cond, 100, 0)
+```
+
 ## Databases
 
 There are also more complex tools like the `Database` interface which enables to easliy implement database wrappers.
@@ -88,6 +97,37 @@ serverErr := &server.ServerError{}
 if err := s.Wait(); errors.As(err, &serverErr) {
   log.Print(err)
 	os.Exit(1)
+}
+```
+
+## FGA with OpenFGA
+
+There is also a package to work with the OpenFGA API.
+
+```go
+// Store is an interface that provides methods for transactional operations on the authz database.
+type Store[Tx any] interface {
+	// Allowed checks if the user is allowed to perform the operation on the object.
+	Allowed(context.Context, User, Object, Relation) (bool, error)
+	// WriteTx starts a read write transaction.
+	WriteTx(context.Context, func(context.Context, Tx) error) error
+}
+
+// StoreTx is an interface that provides methods for transactional operations on the authz database.
+type StoreTx interface {
+	// WriteTuple writes a tuple to the authz database.
+	WriteTuple(context.Context, User, Object, Relation) error
+	// DeleteTuple deletes a tuple from the authz database.
+	DeleteTuple(context.Context, User, Object, Relation) error
+}
+```
+
+This can be used with the package.
+
+```go
+authzStore, err := authx.NewStore(fgaClient, authz.NewWriteTx())
+if err != nil {
+  return err
 }
 ```
 

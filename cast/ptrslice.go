@@ -5,7 +5,6 @@ func PtrSlice[T any](slice ...T) []*T {
 	ps := make([]*T, 0, len(slice))
 
 	for _, e := range slice {
-		e := e
 		ps = append(ps, &e)
 	}
 
