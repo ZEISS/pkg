@@ -23,3 +23,65 @@ func TestIfElse(t *testing.T) {
 		require.Equal(t, test.expected, got)
 	}
 }
+
+func TestOr(t *testing.T) {
+	tests := []struct {
+		a        int
+		b        int
+		expected int
+	}{
+		{1, 2, 1},
+		{0, 2, 2},
+	}
+
+	for _, test := range tests {
+		got := utilx.Or(test.a, test.b)
+		require.Equal(t, test.expected, got)
+	}
+}
+
+func TestAnd(t *testing.T) {
+	tests := []struct {
+		a        int
+		b        int
+		expected int
+	}{
+		{1, 2, 2},
+		{0, 2, 0},
+	}
+
+	for _, test := range tests {
+		got := utilx.And(test.a, test.b)
+		require.Equal(t, test.expected, got)
+	}
+}
+
+func TestNotEmpty(t *testing.T) {
+	tests := []struct {
+		value    int
+		expected bool
+	}{
+		{0, false},
+		{1, true},
+	}
+
+	for _, test := range tests {
+		got := utilx.NotEmpty(test.value)
+		require.Equal(t, test.expected, got)
+	}
+}
+
+func TestEmpty(t *testing.T) {
+	tests := []struct {
+		value    int
+		expected bool
+	}{
+		{0, true},
+		{1, false},
+	}
+
+	for _, test := range tests {
+		got := utilx.Empty(test.value)
+		require.Equal(t, test.expected, got)
+	}
+}
