@@ -12,6 +12,17 @@ func NotEmpty[T comparable](value T) bool {
 	return !Empty(value)
 }
 
+// And works similar to "&&" in other languages.
+func And[T comparable](a, b T) T {
+	var c T
+
+	if a == c {
+		return a
+	}
+
+	return b
+}
+
 // Or works similar to "||" in other languages.
 func Or[T comparable](a, b T) T {
 	var c T
