@@ -8,6 +8,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+type s struct{}
+
+func (s *s) String() string {
+	return "hello"
+}
+
 func TestString(t *testing.T) {
 	tests := []struct {
 		name string
@@ -88,6 +94,11 @@ func TestString(t *testing.T) {
 			name: "nil",
 			in:   "",
 			out:  nil,
+		},
+		{
+			name: "struct",
+			in:   "hello",
+			out:  &s{},
 		},
 	}
 
