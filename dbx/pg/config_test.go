@@ -1,6 +1,7 @@
 package pg_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/zeiss/pkg/dbx/pg"
@@ -32,4 +33,20 @@ func TestFormatDSN(t *testing.T) {
 
 	dsn := config.FormatDSN()
 	assert.Equal(t, "dbname=test_db user=test_user password=password host=localhost port=5432 sslmode=disable", dsn)
+}
+
+func TestContext(t *testing.T) {
+	t.Parallel()
+
+	config := pg.Config{
+		Database: "test_db",
+		Host:     "localhost",
+		Password: "password",
+		Port:     5432,
+		SslMode:  "disable",
+		User:     "test_user",
+	}
+
+	ctx := config.Context(context.Background())
+	assert.Equal(t, config, pg.FromContext(ctx))
 }
