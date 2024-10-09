@@ -39,3 +39,29 @@ func TestFirstN(t *testing.T) {
 		})
 	}
 }
+
+func TestAnyPrefix(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		s        string
+		prefixes []string
+		want     bool
+	}{
+		{"", []string{""}, true},
+		{"", []string{"a"}, false},
+		{"a", []string{""}, true},
+		{"a", []string{"a"}, true},
+		{"a", []string{"b"}, false},
+		{"a", []string{"a", "b"}, true},
+		{"a", []string{"b", "a"}, true},
+		{"a", []string{"b", "c"}, false},
+	}
+
+	for _, tt := range tests {
+		t.Run(fmt.Sprintf("%s_%v", tt.s, tt.prefixes), func(t *testing.T) {
+			got := stringx.AnyPrefix(tt.s, tt.prefixes...)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}
