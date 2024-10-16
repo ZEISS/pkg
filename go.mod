@@ -14,7 +14,7 @@ require (
 	go.uber.org/zap v1.27.0
 	golang.org/x/mod v0.21.0
 	golang.org/x/sync v0.8.0
-	google.golang.org/api v0.200.0
+	google.golang.org/api v0.201.0
 	gorm.io/gorm v1.25.12
 	helm.sh/helm v2.17.0+incompatible
 )
