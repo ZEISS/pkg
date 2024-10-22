@@ -8,10 +8,11 @@ require (
 	firebase.google.com/go/v4 v4.14.1
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/google/uuid v1.6.0
-	github.com/openfga/go-sdk v0.6.1
+	github.com/openfga/go-sdk v0.6.2
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.9.0
 	go.uber.org/zap v1.27.0
+	golang.org/x/crypto v0.28.0
 	golang.org/x/mod v0.21.0
 	golang.org/x/sync v0.8.0
 	google.golang.org/api v0.201.0
@@ -57,7 +58,6 @@ require (
 	go.opentelemetry.io/otel/metric v1.29.0 // indirect
 	go.opentelemetry.io/otel/trace v1.29.0 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
-	golang.org/x/crypto v0.28.0 // indirect
 	golang.org/x/net v0.30.0 // indirect
 	golang.org/x/oauth2 v0.23.0 // indirect
 	golang.org/x/sys v0.26.0 // indirect
