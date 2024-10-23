@@ -94,8 +94,8 @@ github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWE
 github.com/mattn/go-isatty v0.0.20/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
 github.com/mattn/go-runewidth v0.0.15 h1:UNAjwbU9l54TA3KzvqLGxwWjHmMgBUVhBiTjelZgg3U=
 github.com/mattn/go-runewidth v0.0.15/go.mod h1:Jdepj2loyihRzMpdS35Xk/zdY8IAYHsh153qUoGf23w=
-github.com/openfga/go-sdk v0.6.2 h1:hEqg9jwNaz0I7bcKHZKwTY9hice0pdcLnIbCMaSc9vI=
-github.com/openfga/go-sdk v0.6.2/go.mod h1:zui7pHE3eLAYh2fFmEMrWg9XbxYns2WW5Xr/GEgili4=
+github.com/openfga/go-sdk v0.6.3 h1:FO3uDYeV+1y844iVvD7MJYKtmIEP1r4mis7kWCaDG2A=
+github.com/openfga/go-sdk v0.6.3/go.mod h1:zui7pHE3eLAYh2fFmEMrWg9XbxYns2WW5Xr/GEgili4=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4/go.mod h1:xMI15A0UPsDsEKsMN9yxemIoYk6Tm2C1GtYGdfGttqA=
