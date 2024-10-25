@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestJoin(t *testing.T) {
@@ -38,5 +39,5 @@ func TestDrain(t *testing.T) {
 
 	Drain(in)
 
-	assert.Len(t, in, 0)
+	require.Empty(t, in, 0)
 }
