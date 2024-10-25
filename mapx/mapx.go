@@ -1,8 +1,6 @@
 package mapx
 
-import (
-	"github.com/zeiss/pkg/slices"
-)
+import "github.com/zeiss/pkg/slices"
 
 // Delete removes elements from a map by key.
 func Delete[T1 comparable, T2 any](m map[T1]T2, keys ...T1) {

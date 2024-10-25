@@ -1,6 +1,8 @@
 package slices
 
-import "github.com/zeiss/pkg/cast"
+import (
+	"github.com/zeiss/pkg/cast"
+)
 
 // Any checks if any element in a slice satisfies a predicate.
 func Any[T any](fn func(v T) bool, slice ...T) bool {
@@ -106,13 +108,13 @@ func Last[T any](slice ...T) T {
 
 // In checks if a value is in a slice.
 func In[T comparable](val T, slice ...T) bool {
+	m := make(map[T]bool, len(slice))
 	for _, v := range slice {
-		if v == val {
-			return true
-		}
+		m[v] = true
 	}
 
-	return false
+	_, ok := m[val]
+	return ok
 }
 
 // Index returns the index of the first element in a slice that satisfies a predicate.
