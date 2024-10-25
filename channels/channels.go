@@ -55,3 +55,19 @@ func Drain[T any](input <-chan T) {
 		}
 	}()
 }
+
+// Filter filters the channel with the given function.
+func Filter[T any](input <-chan T, fn func(T) bool) <-chan T {
+	c := make(chan T)
+
+	go func() {
+		defer close(c)
+		for v := range input {
+			if fn(v) {
+				c <- v
+			}
+		}
+	}()
+
+	return c
+}
