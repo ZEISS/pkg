@@ -32,3 +32,13 @@ func TestKeep(t *testing.T) {
 		2: "two",
 	}, m)
 }
+
+func TestExists(t *testing.T) {
+	m := map[int]string{
+		1: "one",
+		2: "two",
+		3: "three",
+	}
+	assert.True(t, mapx.Exists(m, 2))
+	assert.False(t, mapx.Exists(m, 4))
+}

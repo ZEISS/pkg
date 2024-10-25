@@ -19,3 +19,9 @@ func Keep[T1 comparable, T2 any](m map[T1]T2, keys ...T1) {
 		}
 	}
 }
+
+// Exists checks if a key exists in a map.
+func Exists[T1 comparable, T2 any](m map[T1]T2, key T1) bool {
+	_, ok := m[key]
+	return ok
+}
