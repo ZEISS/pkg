@@ -26,3 +26,17 @@ func TestJoin(t *testing.T) {
 		return len(el) == 2
 	}, 1*time.Second, 10*time.Millisecond)
 }
+
+func TestDrain(t *testing.T) {
+	in := make(chan int)
+
+	go func() {
+		in <- 1
+		in <- 2
+		close(in)
+	}()
+
+	Drain(in)
+
+	assert.Len(t, in, 0)
+}

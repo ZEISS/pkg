@@ -47,3 +47,11 @@ func Broadcast[T any](input <-chan T, outputs ...chan<- T) {
 		}
 	}()
 }
+
+// Drain drains the channel until it is closed.
+func Drain[T any](input <-chan T) {
+	go func() {
+		for range input {
+		}
+	}()
+}
