@@ -106,6 +106,11 @@ func Last[T any](slice ...T) T {
 	return slice[len(slice)-1]
 }
 
+// First returns the first element of a slice.
+func First[T any](slice ...T) T {
+	return slice[0]
+}
+
 // In checks if a value is in a slice.
 func In[T comparable](val T, slice ...T) bool {
 	m := make(map[T]bool, len(slice))

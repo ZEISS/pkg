@@ -413,3 +413,24 @@ func TestSize(t *testing.T) {
 		})
 	}
 }
+
+func TestFirst(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []int
+		expected int
+	}{
+		{
+			name:     "first element in slice",
+			input:    []int{1, 2, 3},
+			expected: 1,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			actual := slices.First(tt.input...)
+			assert.Equal(t, tt.expected, actual)
+		})
+	}
+}
