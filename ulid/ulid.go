@@ -194,8 +194,8 @@ func (u ULID) String() string {
 }
 
 // UnmarshalBinary decodes a ULID from binary form.
-func (u *ULID) UnmarshalBinary(b []byte) error {
-	if len(b) != len(*u) {
+func (u ULID) UnmarshalBinary(b []byte) error {
+	if len(b) != len(u) {
 		return ErrDataSize
 	}
 
@@ -205,7 +205,7 @@ func (u *ULID) UnmarshalBinary(b []byte) error {
 }
 
 // UnmarshalText decodes a ULID from text form.
-func (u *ULID) UnmarshalText(b []byte) error {
+func (u ULID) UnmarshalText(b []byte) error {
 	if len(b) != EncodedSize {
 		return ErrInvalidLength
 	}

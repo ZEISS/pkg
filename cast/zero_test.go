@@ -12,7 +12,6 @@ func TestZero(t *testing.T) {
 	assert.Equal(t, 0, cast.Zero[int]())
 	assert.Equal(t, "", cast.Zero[string]())
 	assert.False(t, cast.Zero[bool]())
-	assert.Nil(t, nil, cast.Zero[interface{}]())
 	assert.Equal(t, struct{}{}, cast.Zero[struct{}]())
 }
 

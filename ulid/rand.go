@@ -254,7 +254,7 @@ func (u *uint80) load(dst []byte) {
 }
 
 // hi returns the high 16 bits of uint80.
-func (u uint80) hi() uint16 {
+func (u *uint80) hi() uint16 {
 	// converts from bigendian
 	return uint16(u[1]) | uint16(u[0])<<8
 }
@@ -267,7 +267,7 @@ func (u *uint80) setHi(hi uint16) {
 }
 
 // lo returns the low 64 bits of uint80.
-func (u uint80) lo() uint64 {
+func (u *uint80) lo() uint64 {
 	// converts from bigendian
 	return uint64(u[9]) | uint64(u[8])<<8 | uint64(u[7])<<16 | uint64(u[6])<<24 |
 		uint64(u[5])<<32 | uint64(u[4])<<40 | uint64(u[3])<<48 | uint64(u[2])<<56

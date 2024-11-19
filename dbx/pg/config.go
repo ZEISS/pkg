@@ -16,7 +16,7 @@ const (
 )
 
 // Context returns a new Context that carries the provided Config.
-func (cfg Config) Context(ctx context.Context) context.Context {
+func (cfg *Config) Context(ctx context.Context) context.Context {
 	return context.WithValue(ctx, configKey, cfg)
 }
 
@@ -46,7 +46,7 @@ func NewConfig() *Config {
 }
 
 // FormatDSN formats the given Config into a DSN string which can be passed to the driver.
-func (c Config) FormatDSN() string {
+func (c *Config) FormatDSN() string {
 	var params []string
 
 	if utilx.NotEmpty(c.Database) {
