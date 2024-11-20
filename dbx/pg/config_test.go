@@ -38,7 +38,7 @@ func TestFormatDSN(t *testing.T) {
 func TestContext(t *testing.T) {
 	t.Parallel()
 
-	config := pg.Config{
+	config := &pg.Config{
 		Database: "test_db",
 		Host:     "localhost",
 		Password: "password",
