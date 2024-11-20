@@ -1,4 +1,3 @@
-
 package finalizers
 
 // Finalizer is an interface that can be used to add, remove and check for
