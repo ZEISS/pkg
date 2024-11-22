@@ -3,6 +3,9 @@ package reconciler
 import (
 	"errors"
 	"fmt"
+
+	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/client-go/tools/record"
 )
 
 // Event leverages go's 1.13 error wrapping.
@@ -14,6 +17,9 @@ var EventIs = errors.Is
 // EventAs finds the first error in err's chain that matches target, and if so,
 // sets target to that error value and returns true.
 var EventAs = errors.As
+
+// RecordFactory is a function that returns a new Event.
+type RecordFactory func(eventtype, reason, messageFmt string, args ...interface{}) Event
 
 // NewEvent returns a new Event.
 func NewEvent(eventtype, reason, messageFmt string, args ...interface{}) Event {
@@ -59,4 +65,9 @@ func (e *ReconcilerEvent) As(target interface{}) bool {
 // Error ...
 func (e *ReconcilerEvent) Error() string {
 	return fmt.Errorf(e.Format, e.Args...).Error()
+}
+
+// Record ...
+func (e *ReconcilerEvent) Record(obj runtime.Object, recorder record.EventRecorder) {
+	recorder.Event(obj, e.EventType, e.Reason, e.Error())
 }
