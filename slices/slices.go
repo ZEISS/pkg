@@ -151,3 +151,8 @@ func Unique[T1 any, T2 comparable](fn func(v T1) T2, slice ...T1) []T1 {
 func Size[T any](size int, slice ...T) bool {
 	return size == len(slice)
 }
+
+// Append adds elements to a slice.
+func Append[T any](slice []T, elements ...T) []T {
+	return append(slice, elements...)
+}

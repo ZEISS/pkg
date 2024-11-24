@@ -434,3 +434,26 @@ func TestFirst(t *testing.T) {
 		})
 	}
 }
+
+func TestAppend(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []int
+		el       int
+		expected []int
+	}{
+		{
+			name:     "append element to slice",
+			input:    []int{1, 2},
+			el:       3,
+			expected: []int{1, 2, 3},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			actual := slices.Append(tt.input, tt.el)
+			assert.Equal(t, tt.expected, actual)
+		})
+	}
+}
