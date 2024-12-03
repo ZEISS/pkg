@@ -15,6 +15,8 @@ func String(val any) string {
 		return fmt.Sprintf("%d", val)
 	case float32, float64:
 		return fmt.Sprintf("%f", val)
+	case []byte:
+		return string(val)
 	case string:
 		return val
 	case nil:

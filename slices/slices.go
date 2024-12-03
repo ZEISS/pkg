@@ -156,3 +156,18 @@ func Size[T any](size int, slice ...T) bool {
 func Append[T any](slice []T, elements ...T) []T {
 	return append(slice, elements...)
 }
+
+// Len returns the length of a slice.
+func Len[T any](slice []T) int {
+	return len(slice)
+}
+
+// Reverse reverses the order of elements in a slice.
+func Reverse[T any](slice []T) []T {
+	for i := len(slice)/2 - 1; i >= 0; i-- {
+		opp := len(slice) - 1 - i
+		slice[i], slice[opp] = slice[opp], slice[i]
+	}
+
+	return slice
+}
