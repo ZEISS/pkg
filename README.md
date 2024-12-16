@@ -9,6 +9,8 @@
 
 `pkg` is a collection of Go packages that make the life of a Go developers at ZEISS easier.
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ZEISS/pkg?quickstart=1)
+
 ## Installation
 
 ```bash
