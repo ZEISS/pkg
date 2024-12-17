@@ -15,7 +15,7 @@ require (
 	golang.org/x/crypto v0.31.0
 	golang.org/x/mod v0.22.0
 	golang.org/x/sync v0.10.0
-	google.golang.org/api v0.211.0
+	google.golang.org/api v0.212.0
 	gorm.io/gorm v1.25.12
 	helm.sh/helm v2.17.0+incompatible
 	k8s.io/apimachinery v0.32.0
@@ -24,9 +24,9 @@ require (
 )
 
 require (
-	cloud.google.com/go/auth v0.12.1 // indirect
+	cloud.google.com/go/auth v0.13.0 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.6 // indirect
-	cloud.google.com/go/compute/metadata v0.5.2 // indirect
+	cloud.google.com/go/compute/metadata v0.6.0 // indirect
 	github.com/BurntSushi/toml v1.4.1-0.20240526193622-a339e1f7089c // indirect
 	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/andybalholm/brotli v1.0.5 // indirect
