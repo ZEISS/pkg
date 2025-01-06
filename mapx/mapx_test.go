@@ -42,3 +42,27 @@ func TestExists(t *testing.T) {
 	assert.True(t, mapx.Exists(m, 2))
 	assert.False(t, mapx.Exists(m, 4))
 }
+
+func TestMerge(t *testing.T) {
+	m1 := map[int]string{
+		1: "one",
+		2: "two",
+	}
+	m2 := map[int]string{
+		3: "three",
+		4: "four",
+	}
+	m3 := map[int]string{
+		4: "foo",
+		5: "five",
+		6: "six",
+	}
+	assert.Equal(t, map[int]string{
+		1: "one",
+		2: "two",
+		3: "three",
+		4: "foo",
+		5: "five",
+		6: "six",
+	}, mapx.Merge(m1, m2, m3))
+}

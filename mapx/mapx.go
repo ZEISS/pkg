@@ -23,3 +23,16 @@ func Exists[T1 comparable, T2 any](m map[T1]T2, key T1) bool {
 	_, ok := m[key]
 	return ok
 }
+
+// Merge merges a set of maps into a single map.
+func Merge[T1 comparable, T2 any](maps ...map[T1]T2) map[T1]T2 {
+	result := make(map[T1]T2)
+
+	for _, m := range maps {
+		for k, v := range m {
+			result[k] = v
+		}
+	}
+
+	return result
+}
