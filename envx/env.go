@@ -1,5 +1,9 @@
 package envx
 
+import (
+	"strings"
+)
+
 // Env is the environment variables.
 type Env map[string]string
 
@@ -22,4 +26,20 @@ func (e Env) Strings() []string {
 	}
 
 	return result
+}
+
+// ToEnv converts the environment to a list of strings.
+func ToEnv(env []string) Env {
+	ee := Env{}
+
+	for _, e := range env {
+		k, v, ok := strings.Cut(e, "=")
+		if !ok || k == "" {
+			continue
+		}
+
+		ee[k] = v
+	}
+
+	return ee
 }
