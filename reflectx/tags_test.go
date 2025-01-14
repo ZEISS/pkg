@@ -38,3 +38,25 @@ func TestParseTag(t *testing.T) {
 		assert.Equal(t, test.expectedOptions, opt)
 	}
 }
+
+func TestIsValidTag(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		tag      string
+		expected bool
+	}{
+		{
+			tag:      "name",
+			expected: true,
+		},
+		{
+			tag:      "",
+			expected: false,
+		},
+	}
+
+	for _, test := range tests {
+		assert.Equal(t, test.expected, reflectx.IsValidTag(test.tag))
+	}
+}
