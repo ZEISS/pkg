@@ -10,6 +10,26 @@ import (
 // TagOptions ...
 type TagOptions string
 
+// Contains reports whether a comma-separated list of options
+// contains a particular substr flag. substr must be surrounded by a
+// string boundary or commas.
+func (o TagOptions) Contains(optionName string) bool {
+	if len(o) == 0 {
+		return false
+	}
+
+	s := string(o)
+	for s != "" {
+		var name string
+		name, s, _ = strings.Cut(s, ",")
+		if name == optionName {
+			return true
+		}
+	}
+
+	return false
+}
+
 // ParseTag splits a struct field's json tag into its name and
 // comma-separated options.
 func ParseTag(tag string) (string, TagOptions) {
