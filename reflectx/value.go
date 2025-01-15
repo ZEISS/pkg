@@ -3,6 +3,7 @@ package reflectx
 import "reflect"
 
 func IsEmptyValue(v reflect.Value) bool {
+	// nolint:exhaustive
 	switch v.Kind() {
 	case reflect.Array, reflect.Map, reflect.Slice, reflect.String:
 		return v.Len() == 0
