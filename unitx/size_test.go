@@ -56,7 +56,7 @@ func TestHumanSize_ToInt64(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.h.ToInt()
+			got, err := tt.h.ToInt64()
 			if tt.wantErr {
 				require.Error(t, err)
 			} else {
@@ -178,7 +178,7 @@ func TestHumanSize_ToInt32(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.h.ToInt()
+			got, err := tt.h.ToInt32()
 			if tt.wantErr {
 				require.Error(t, err)
 			} else {

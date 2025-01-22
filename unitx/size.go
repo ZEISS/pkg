@@ -11,7 +11,7 @@ import (
 // Integerer represents an integer.
 type Integerer interface {
 	// ToInt converts the integer to an integer.
-	ToInt() (int64, error)
+	ToInt() (int, error)
 	// ToInt64 converts the integer to an 64 bit integer.
 	ToInt64() (int64, error)
 	// ToInt32 converts the integer to an 32 bit integer.
@@ -101,13 +101,13 @@ func (h HumanSize) ToInt64() (int64, error) {
 }
 
 // ToInt converts the human size to an integer.
-func (h HumanSize) ToInt() (int64, error) {
-	int, err := h.ToInt64()
+func (h HumanSize) ToInt() (int, error) {
+	i64, err := h.ToInt64()
 	if err != nil {
 		return 0, err
 	}
 
-	return int, nil
+	return int(i64), nil
 }
 
 // ToInt32 converts the human size to an 32 bit integer.
