@@ -5,6 +5,7 @@ import (
 	"reflect"
 )
 
+// FieldData contains the information of a field of a struct
 type FieldData struct {
 	Field    reflect.StructField
 	Value    reflect.Value
@@ -12,10 +13,11 @@ type FieldData struct {
 	Parent   *FieldData
 }
 
+// FillerFunc is a function that fills a field with a specific
 type FillerFunc func(field *FieldData)
 
 // Filler contains all the functions to fill any struct field with any type
-// allowing to define function by Kind, Type of field name
+// allowing to define function by Kind, Type of field name.
 type Filler struct {
 	FuncByName map[string]FillerFunc
 	FuncByType map[TypeHash]FillerFunc
@@ -24,7 +26,7 @@ type Filler struct {
 }
 
 // Fill apply all the functions contained on Filler, setting all the possible
-// values
+// values.
 func (f *Filler) Fill(variable interface{}) {
 	fields := f.getFields(variable)
 	f.SetDefaultValues(fields)
@@ -36,6 +38,7 @@ func (f *Filler) getFields(variable interface{}) []*FieldData {
 	return f.GetFieldsFromValue(valueObject, nil)
 }
 
+// GetFieldsFromValue returns all the fields of a struct
 func (f *Filler) GetFieldsFromValue(valueObject reflect.Value, parent *FieldData) []*FieldData {
 	typeObject := valueObject.Type()
 
@@ -58,6 +61,7 @@ func (f *Filler) GetFieldsFromValue(valueObject reflect.Value, parent *FieldData
 	return results
 }
 
+// SetDefaultValues sets the default values for all the fields
 func (f *Filler) SetDefaultValues(fields []*FieldData) {
 	for _, field := range fields {
 		if f.isEmpty(field) {
@@ -89,9 +93,11 @@ func (f *Filler) isEmpty(field *FieldData) bool {
 	case reflect.String:
 		return field.Value.String() == ""
 	}
-	return true
+
+	return true // no-op
 }
 
+// SetDefaultValue sets the default value for a field
 func (f *Filler) SetDefaultValue(field *FieldData) {
 	getters := []func(field *FieldData) FillerFunc{
 		f.getFunctionByName,
