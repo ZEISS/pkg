@@ -8,6 +8,16 @@ import (
 	"unicode"
 )
 
+// Integerer represents an integer.
+type Integerer interface {
+	// ToInt converts the integer to an integer.
+	ToInt() (int64, error)
+	// ToInt64 converts the integer to an 64 bit integer.
+	ToInt64() (int64, error)
+	// ToInt32 converts the integer to an 32 bit integer.
+	ToInt32() (int32, error)
+}
+
 // See: http://en.wikipedia.org/wiki/Binary_prefix
 const (
 	// Decimal
@@ -28,9 +38,11 @@ const (
 // HumanByteSize represents a human-readable byte size.
 type HumanSize string
 
-// ToInt converts the human size to an integer.
+var _ Integerer = (*HumanSize)(nil)
+
+// ToInt64 converts the human size to an 64 bit integer.
 // nolint: gocyclo
-func (h HumanSize) ToInt() (int64, error) {
+func (h HumanSize) ToInt64() (int64, error) {
 	var size int64
 
 	lastDigit := 0
@@ -86,4 +98,24 @@ func (h HumanSize) ToInt() (int64, error) {
 	}
 
 	return size, nil
+}
+
+// ToInt converts the human size to an integer.
+func (h HumanSize) ToInt() (int64, error) {
+	int, err := h.ToInt64()
+	if err != nil {
+		return 0, err
+	}
+
+	return int, nil
+}
+
+// ToInt32 converts the human size to an 32 bit integer.
+func (h HumanSize) ToInt32() (int32, error) {
+	int, err := h.ToInt64()
+	if err != nil {
+		return 0, err
+	}
+
+	return int32(int), nil
 }

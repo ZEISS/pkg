@@ -60,7 +60,8 @@ type ExampleBasic struct {
 	IntSliceSlice    [][]int       `default:"[[1],[2],[3],[4]]"`
 	StringSliceSlice [][]string    `default:"[[1],[]]"`
 
-	DateTime string `default:"{{date:1,-10,0}} {{time:1,-5,10}}"`
+	DateTime  string `default:"{{date:1,-10,0}} {{time:1,-5,10}}"`
+	HumanSize string `default:"1KiB"`
 }
 
 func (s *DefaultsSuite) TestSetDefaultsBasic(c *C) {
@@ -106,6 +107,7 @@ func (s *DefaultsSuite) assertTypes(c *C, foo *ExampleBasic) {
 	c.Assert(foo.IntSliceSlice, DeepEquals, [][]int{{1}, {2}, {3}, {4}})
 	c.Assert(foo.StringSliceSlice, DeepEquals, [][]string{{"1"}, {}})
 	c.Assert(foo.DateTime, Equals, "2020-08-10 12:55:10")
+	c.Assert(foo.HumanSize, Equals, "1KiB")
 }
 
 func (s *DefaultsSuite) TestSetDefaultsWithValues(c *C) {
