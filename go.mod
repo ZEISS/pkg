@@ -9,7 +9,7 @@ require (
 	firebase.google.com/go/v4 v4.15.1
 	github.com/gofiber/fiber/v2 v2.52.6
 	github.com/google/uuid v1.6.0
-	github.com/openfga/go-sdk v0.6.4
+	github.com/openfga/go-sdk v0.6.5
 	github.com/spf13/pflag v1.0.6
 	github.com/stretchr/testify v1.10.0
 	go.uber.org/zap v1.27.0
