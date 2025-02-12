@@ -1,23 +1,12 @@
 package utilx
 
 import (
-	"testing"
 	"time"
 
-	"bou.ke/monkey"
 	. "gopkg.in/check.v1"
 )
 
 // Hook up gocheck into the "go test" runner.
-
-func Test(t *testing.T) {
-	monkey.Patch(time.Now, func() time.Time {
-		t, _ := time.Parse("2006-01-02 15:04:05", "2020-06-10 12:00:00")
-		return t
-	})
-
-	TestingT(t)
-}
 
 type DefaultsSuite struct{}
 
