@@ -6,7 +6,7 @@ toolchain go1.23.4
 
 require (
 	firebase.google.com/go/v4 v4.15.1
-	github.com/creack/pty v1.1.9
+	github.com/creack/pty v1.1.24
 	github.com/fatih/color v1.18.0
 	github.com/gofiber/fiber/v2 v2.52.6
 	github.com/google/uuid v1.6.0
