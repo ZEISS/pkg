@@ -14,6 +14,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
+
+var build = fmt.Sprintf("%s (%s) (%s)", version, commit, date)
+
 type config struct {
 	timeout     time.Duration
 	connTimeout time.Duration
@@ -28,6 +36,7 @@ var rootCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return runRoot(cmd.Context(), args...)
 	},
+	Version: build,
 }
 
 func init() {

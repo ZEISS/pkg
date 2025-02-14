@@ -1,13 +1,59 @@
+project_name: pkg
+
 before:
   hooks:
     - go mod tidy
+
 builds:
-  - skip: true
+  - id: waitfor
+    binary: waitfor-{{.Os}}-{{.Arch}}
+    main: cmd/waitfor/main.go
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm
+      - arm64
+    ignore:
+      - goos: darwin
+        goarch: 386
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+    no_unique_dist_dir: true
+
+archives:
+  - id: waitfor
+    builds:
+      - waitfor
+    name_template: "waitfor_{{.Version}}_{{.Os}}_{{.Arch}}"
+
+dockers:
+  - dockerfile: Dockerfile
+    goos: linux
+    goarch: amd64
+    ids:
+      - waitfor
+    image_templates:
+      - "ghcr.io/zeiss/{{.ProjectName}}/waitfor:latest"
+      - "ghcr.io/zeiss/{{.ProjectName}}/waitfor:{{.Tag}}"
+      - "ghcr.io/zeiss/{{.ProjectName}}/waitfor"
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--build-arg=BINARY=waitfor-linux-amd64"
+      - "--platform=linux/amd64"
+
 release:
   header: |
     ## Changelog ({{ .Date }})
 
     Welcome to this new release! We hope you enjoy the changes we've made.
+
 changelog:
   groups:
     - title: Features
@@ -24,3 +70,9 @@ changelog:
       - "^docs:"
       - typo
       - (?i)foo
+
+snapshot:
+  name_template: "{{.Tag}}"
+
+checksum:
+  name_template: "pkg_checksums.txt"
