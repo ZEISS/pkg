@@ -26,6 +26,7 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
           cache-dependency-path: |
+            go.sum
             tools/go.sum
       - run: make test
       - uses: dorny/test-reporter@v1

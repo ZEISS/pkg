@@ -30,7 +30,10 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-go@v5
         with:
-          go-version-file: ./go.mod
+          go-version-file: ./tools/go.mod
+          cache-dependency-path: |
+            go.sum
+            tools/go.sum
       - uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567
         with:
           registry: ${{ env.REGISTRY }}
