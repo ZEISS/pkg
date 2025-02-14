@@ -1,4 +1,4 @@
-package main
+package schemes
 
 import (
 	"context"
@@ -6,8 +6,9 @@ import (
 	"net/http"
 )
 
-func init() {
-	register(func(ctx context.Context, url string) error {
+// HTTP returns a wait function that waits for a HTTP connection to be established.
+func HTTP() WaitFunc {
+	return func(ctx context.Context, url string) error {
 		req, err := http.NewRequestWithContext(ctx, http.MethodHead, url, nil)
 		if err != nil {
 			return err
@@ -23,5 +24,5 @@ func init() {
 		}
 
 		return nil
-	}, "http", "https")
+	}
 }

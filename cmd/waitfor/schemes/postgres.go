@@ -1,4 +1,4 @@
-package main
+package schemes
 
 import (
 	"context"
@@ -7,8 +7,9 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-func init() {
-	register(func(ctx context.Context, connStr string) error {
+// Postgres returns a wait function that waits for a Postgres connection to be established.
+func Postgres() WaitFunc {
+	return func(ctx context.Context, connStr string) error {
 		conn, err := pgx.Connect(ctx, connStr)
 		if err != nil {
 			return fmt.Errorf("connect: %w", err)
@@ -21,5 +22,5 @@ func init() {
 		}
 
 		return nil
-	}, "postgres", "postgresql")
+	}
 }

@@ -1,13 +1,14 @@
 package main
 
 import (
-	"fmt"
+	"context"
 	"log"
 	"strings"
 	"sync"
 	"time"
 
 	"github.com/fatih/color"
+	"golang.org/x/sync/errgroup"
 )
 
 type Runner struct {
@@ -15,8 +16,6 @@ type Runner struct {
 
 	doneCh chan struct{}
 	stopCh chan struct{}
-
-	failed bool
 
 	stopOnce sync.Once
 }
@@ -53,38 +52,27 @@ func NewRunner(tasks []Task) *Runner {
 	}
 }
 
-func (r *Runner) Run() error {
-	defer close(r.doneCh)
+func (r *Runner) Run(ctx context.Context) error {
+	g, _ := errgroup.WithContext(ctx)
 	result := make(chan bool, len(r.procs))
+
 	for _, proc := range r.procs {
-		proc.Start()
-		go func(p ProcessRunner) {
-			result <- p.Wait()
-		}(proc)
+		g.Go(func() error {
+			proc.Start()
+			result <- proc.Wait()
+			return nil
+		})
 	}
 
-	var err error
-	for range r.procs {
-		if <-result {
-			go r.stopOnce.Do(r._stop)
-		} else {
-			go r.stopOnce.Do(r._stopFail)
-		}
+	if err := g.Wait(); err != nil {
+		return err
 	}
 
-	if r.failed {
-		return fmt.Errorf("one or more commands failed or quit early")
-	}
-	return err
+	return nil
 }
 
 func (r *Runner) Stop() {
 	r.stopOnce.Do(r._stop)
-}
-
-func (r *Runner) _stopFail() {
-	r.failed = true
-	r._stop()
 }
 
 func (r *Runner) _stop() {
