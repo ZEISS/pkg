@@ -6,11 +6,34 @@ import (
 	"fmt"
 	"log"
 	"net/url"
-	"sort"
+	"os"
 	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/spf13/cobra"
 )
+
+type config struct {
+	timeout     time.Duration
+	connTimeout time.Duration
+	retryTime   time.Duration
+}
+
+var cfg = &config{}
+
+var rootCmd = &cobra.Command{
+	Use:   "wait-for",
+	Short: `wait-for waits for other service to become available.`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return runRoot(cmd.Context())
+	},
+}
+
+func init() {
+	rootCmd.Flags().DurationVar(&cfg.timeout, "timeout", time.Minute, "Timeout to wait for all checks to complete.")
+	rootCmd.Flags().DurationVar(&cfg.connTimeout, "connect-timeout", 5*time.Second, "Timeout to wait for a single check to complete.")
+	rootCmd.Flags().DurationVar(&cfg.retryTime, "retry-time", 3*time.Second, "Time to wait between retries.")
+}
 
 type waitFunc func(context.Context, string) error
 
@@ -35,6 +58,7 @@ func waitFor(ctx context.Context, urlStr string) error {
 
 	t := time.NewTicker(retryTime)
 	defer t.Stop()
+
 	for {
 		fn, ok := waitFuncs[u.Scheme]
 		if !ok {
@@ -57,38 +81,25 @@ func waitFor(ctx context.Context, urlStr string) error {
 	}
 }
 
-func main() {
-	log.SetFlags(log.Lshortfile)
-	log.SetPrefix("waitfor: ")
-	flag.DurationVar(&timeout, "timeout", time.Minute, "Timeout to wait for all checks to complete.")
-	flag.DurationVar(&connTimeout, "connect-timeout", 5*time.Second, "Timeout to wait for a single check to complete.")
-	flag.DurationVar(&retryTime, "retry-time", 3*time.Second, "Time to wait between retries.")
-	flag.Usage = func() {
-		fmt.Println("Usage: waitfor [flags] [schema://]host[:port]")
-
-		var schemas []string
-		for schema := range waitFuncs {
-			schemas = append(schemas, schema)
-		}
-		sort.Strings(schemas)
-		fmt.Println("\nSupported schemas:")
-		for _, schema := range schemas {
-			fmt.Println("  ", schema)
-		}
-		fmt.Println()
-
-		fmt.Println("Flags:")
-		flag.PrintDefaults()
-	}
-	flag.Parse()
-
-	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+func runRoot(ctx context.Context) error {
+	ctx, cancel := context.WithTimeout(ctx, timeout)
 	defer cancel()
 
 	for _, urlStr := range flag.Args() {
 		err := waitFor(ctx, urlStr)
 		if err != nil {
-			log.Panic(err)
+			return err
 		}
+	}
+
+	return nil
+}
+
+func main() {
+	log.SetFlags(0)
+	log.SetOutput(os.Stderr)
+
+	if err := rootCmd.Execute(); err != nil {
+		log.Fatal(err)
 	}
 }

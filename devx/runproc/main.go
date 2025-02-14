@@ -2,31 +2,42 @@ package main
 
 import (
 	"bytes"
-	"flag"
+	"context"
 	"log"
 	"os"
-	"os/signal"
+
+	"github.com/spf13/cobra"
 )
 
-func main() {
-	file := flag.String("f", "", "Procfile to run.")
-	localFile := flag.String("l", "", "Local Procfile to append.")
-	flag.Parse()
+type config struct {
+	file  string
+	local string
+}
 
-	log.SetFlags(log.Lshortfile)
+var cfg = &config{}
 
-	if *file == "" {
-		log.Fatal("No Procfile specified.")
-	}
+var rootCmd = &cobra.Command{
+	Use:   "nctl",
+	Short: "nctl is a tool for managing operator resources",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return runRoot(cmd.Context())
+	},
+}
 
-	data, err := os.ReadFile(*file)
+func init() {
+	rootCmd.Flags().StringP("file", "f", cfg.file, "Procfile to run.")
+	rootCmd.Flags().StringP("local", "l", cfg.local, "Local Procfile to append.")
+}
+
+func runRoot(ctx context.Context) error {
+	data, err := os.ReadFile(cfg.file)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var envData []byte
-	if *localFile != "" {
-		envData, _ = os.ReadFile(*localFile)
+	envData, err := os.ReadFile(cfg.local)
+	if err != nil {
+		return err
 	}
 
 	buf := bytes.NewBuffer(data)
@@ -41,17 +52,19 @@ func main() {
 
 	run := NewRunner(tasks)
 
-	ch := make(chan os.Signal, 3)
-	signal.Notify(ch, shutdownSignals...)
-	go func() {
-		<-ch
-		go run.Stop()
-		<-ch
-		os.Exit(1)
-	}()
-
-	err = run.Run()
+	err = run.Run(ctx)
 	if err != nil {
-		log.Fatalln(err)
+		return err
+	}
+
+	return nil
+}
+
+func main() {
+	log.SetFlags(0)
+	log.SetOutput(os.Stderr)
+
+	if err := rootCmd.Execute(); err != nil {
+		log.Fatal(err)
 	}
 }
