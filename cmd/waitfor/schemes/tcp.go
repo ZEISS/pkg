@@ -1,4 +1,4 @@
-package main
+package schemes
 
 import (
 	"context"
@@ -7,8 +7,9 @@ import (
 	"time"
 )
 
-func init() {
-	register(func(ctx context.Context, urlStr string) error {
+// TCP returns a wait function that waits for a TCP connection to be established.
+func TCP() WaitFunc {
+	return func(ctx context.Context, urlStr string) error {
 		u, err := url.Parse(urlStr)
 		if err != nil {
 			return err
@@ -26,5 +27,5 @@ func init() {
 		defer c.Close()
 
 		return nil
-	}, "tcp")
+	}
 }
