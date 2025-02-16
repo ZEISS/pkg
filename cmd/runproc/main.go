@@ -11,32 +11,35 @@ import (
 )
 
 type config struct {
-	file  string
-	local string
+	File  string
+	Local string
 }
 
 var cfg = &config{}
 
 var rootCmd = &cobra.Command{
-	Use:   "nctl",
-	Short: "nctl is a tool for managing operator resources",
+	Use:   "runproc",
+	Short: `runproc is a simple process runner.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return runRoot(cmd.Context())
 	},
 }
 
 func init() {
-	rootCmd.Flags().StringP("file", "f", cfg.file, "Procfile to run.")
-	rootCmd.Flags().StringP("local", "l", cfg.local, "Local Procfile to append.")
+	rootCmd.Flags().StringVarP(&cfg.File, "file", "f", cfg.File, "Procfile to run.")
+	rootCmd.Flags().StringVarP(&cfg.Local, "local", "l", cfg.Local, "Local Procfile to append.")
+
+	rootCmd.SilenceUsage = true
+	rootCmd.SilenceErrors = true
 }
 
 func runRoot(ctx context.Context) error {
-	data, err := os.ReadFile(cfg.file)
+	data, err := os.ReadFile(cfg.File)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	envData, err := os.ReadFile(cfg.local)
+	envData, err := os.ReadFile(cfg.Local)
 	if err != nil {
 		return err
 	}

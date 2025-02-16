@@ -1,0 +1,2 @@
+demo: watch tail /var/log/system.log
+demo2: watch -n 1 date
