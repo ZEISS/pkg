@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/zeiss/pkg/cmd/runproc/task"
 )
 
 type config struct {
@@ -44,13 +45,13 @@ func runRoot(ctx context.Context) error {
 	buf.WriteString("\n")
 	buf.Write(envData)
 
-	tasks, err := Parse(buf)
+	tasks, err := task.Parse(buf)
 	if err != nil {
 		log.Fatalln(err)
 	}
 	log.SetFlags(log.Lshortfile)
 
-	run := NewRunner(tasks)
+	run := task.NewRunner(tasks)
 
 	err = run.Run(ctx)
 	if err != nil {

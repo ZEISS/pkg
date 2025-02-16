@@ -1,4 +1,4 @@
-package main
+package task
 
 type Task struct {
 	// Name used in logs
