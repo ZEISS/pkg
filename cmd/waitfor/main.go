@@ -49,9 +49,7 @@ func init() {
 	rootCmd.Flags().DurationVar(&cfg.retryTime, "retry-time", 3*time.Second, "Time to wait between retries.")
 }
 
-var (
-	waitFuncs = map[string]schemes.WaitFunc{}
-)
+var waitFuncs = map[string]schemes.WaitFunc{}
 
 func register(fn schemes.WaitFunc, schema ...string) {
 	for _, s := range schema {
