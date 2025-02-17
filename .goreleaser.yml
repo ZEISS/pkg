@@ -22,12 +22,33 @@ builds:
     ldflags:
       - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
     no_unique_dist_dir: true
+  - id: runproc
+    binary: runproc-{{.Os}}-{{.Arch}}
+    main: cmd/runproc/main.go
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm
+      - arm64
+    ignore:
+      - goos: darwin
+        goarch: 386
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+    no_unique_dist_dir: true
 
 archives:
   - id: waitfor
     builds:
       - waitfor
     name_template: "waitfor_{{.Version}}_{{.Os}}_{{.Arch}}"
+  - id: runproc
+    builds:
+      - runproc
+    name_template: "runproc_{{.Version}}_{{.Os}}_{{.Arch}}"
 
 dockers:
   - dockerfile: Dockerfile
@@ -46,6 +67,23 @@ dockers:
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
       - "--build-arg=BINARY=waitfor-linux-amd64"
+      - "--platform=linux/amd64"
+  - dockerfile: Dockerfile
+    goos: linux
+    goarch: amd64
+    ids:
+      - runproc
+    image_templates:
+      - "ghcr.io/zeiss/{{.ProjectName}}/runproc:latest"
+      - "ghcr.io/zeiss/{{.ProjectName}}/runproc:{{.Tag}}"
+      - "ghcr.io/zeiss/{{.ProjectName}}/runproc"
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--build-arg=BINARY=runproc-linux-amd64"
       - "--platform=linux/amd64"
 
 release:
