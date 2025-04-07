@@ -1,6 +1,8 @@
 module github.com/zeiss/pkg
 
 go 1.23.0
+toolchain go1.24.1
+
 require (
 	firebase.google.com/go/v4 v4.15.2
 	github.com/creack/pty v1.1.24
@@ -17,7 +19,7 @@ require (
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.36.0
 	golang.org/x/mod v0.24.0
-	golang.org/x/sync v0.12.0
+	golang.org/x/sync v0.13.0
 	google.golang.org/api v0.228.0
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
 	gorm.io/gorm v1.25.12
