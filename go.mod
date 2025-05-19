@@ -11,7 +11,7 @@ require (
 	github.com/go-playground/validator/v10 v10.26.0
 	github.com/gofiber/fiber/v2 v2.52.6
 	github.com/google/uuid v1.6.0
-	github.com/jackc/pgx/v5 v5.7.4
+	github.com/jackc/pgx/v5 v5.7.5
 	github.com/katallaxie/pkg v0.7.7
 	github.com/openfga/go-sdk v0.7.1
 	github.com/spf13/cobra v1.9.1
