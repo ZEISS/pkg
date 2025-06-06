@@ -5,7 +5,7 @@ go 1.24.0
 toolchain go1.24.1
 
 require (
-	firebase.google.com/go/v4 v4.15.2
+	firebase.google.com/go/v4 v4.16.0
 	github.com/creack/pty v1.1.24
 	github.com/fatih/color v1.18.0
 	github.com/go-playground/validator/v10 v10.26.0
