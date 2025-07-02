@@ -8,7 +8,7 @@ require (
 	firebase.google.com/go/v4 v4.16.1
 	github.com/creack/pty v1.1.24
 	github.com/fatih/color v1.18.0
-	github.com/go-playground/validator/v10 v10.26.0
+	github.com/go-playground/validator/v10 v10.27.0
 	github.com/gofiber/fiber/v2 v2.52.8
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.7.5
