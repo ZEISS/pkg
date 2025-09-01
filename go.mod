@@ -15,7 +15,7 @@ require (
 	github.com/katallaxie/pkg v0.7.8
 	github.com/openfga/go-sdk v0.7.1
 	github.com/spf13/cobra v1.9.1
-	github.com/spf13/pflag v1.0.7
+	github.com/spf13/pflag v1.0.8
 	github.com/stretchr/testify v1.11.1
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.41.0
