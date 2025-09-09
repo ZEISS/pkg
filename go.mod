@@ -19,7 +19,7 @@ require (
 	github.com/stretchr/testify v1.11.1
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.42.0
-	golang.org/x/mod v0.27.0
+	golang.org/x/mod v0.28.0
 	golang.org/x/sync v0.17.0
 	google.golang.org/api v0.249.0
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
