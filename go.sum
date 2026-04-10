@@ -146,8 +146,8 @@ github.com/onsi/ginkgo/v2 v2.27.2 h1:LzwLj0b89qtIy6SSASkzlNvX6WktqurSHwkk2ipF/Ns
 github.com/onsi/ginkgo/v2 v2.27.2/go.mod h1:ArE1D/XhNXBXCBkKOLkbsb2c81dQHCRcF5zwn/ykDRo=
 github.com/onsi/gomega v1.38.2 h1:eZCjf2xjZAqe+LeWvKb5weQ+NcPwX84kqJ0cZNxok2A=
 github.com/onsi/gomega v1.38.2/go.mod h1:W2MJcYxRGV63b418Ai34Ud0hEdTVXq9NW9+Sx6uXf3k=
-github.com/openfga/go-sdk v0.7.5 h1:Z1YL264hkBzrg1ejRVSzGRMjnG+ha4aexAA6b45F9+Q=
-github.com/openfga/go-sdk v0.7.5/go.mod h1:VfBl0/Ipr0LMX9ftnk2t4EPJ3x6ptW7CD8n/K31D2PY=
+github.com/openfga/go-sdk v0.8.0 h1:xwjqxO1v3QU6Tzx5xu33jpOpurqJYxXPM2uiR2QsfCo=
+github.com/openfga/go-sdk v0.8.0/go.mod h1:s5zZD4NFmf6yQa74iJEAwBZgHx4NaNzoOOVmA6YcY2M=
 github.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=
 github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 h1:GFCKgmp0tecUJ0sJuv4pzYCqS9+RGSn52M3FUwPs+uo=
 github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10/go.mod h1:t/avpk3KcrXxUnYOhZhMXJlSEyie6gQbtLq5NM3loB8=
