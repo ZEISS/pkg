@@ -9,7 +9,7 @@ require (
 	github.com/go-playground/validator/v10 v10.30.3
 	github.com/gofiber/fiber/v2 v2.52.13
 	github.com/google/uuid v1.6.0
-	github.com/jackc/pgx/v5 v5.9.2
+	github.com/jackc/pgx/v5 v5.10.0
 	github.com/katallaxie/pkg v0.7.11
 	github.com/openfga/go-sdk v0.8.1
 	github.com/spf13/cobra v1.10.2
