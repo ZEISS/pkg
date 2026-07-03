@@ -1,6 +1,6 @@
 # Pkg
 
-[![Test & Lint](https://github.com/zeisss/pkg/actions/workflows/main.yml/badge.svg)](https://github.com/zeisss/pkg/actions/workflows/main.yml)
+[![Test & Lint](https://github.com/zeiss/pkg/actions/workflows/main.yml/badge.svg)](https://github.com/zeisss/pkg/actions/workflows/main.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/zeisss/pkg.svg)](https://pkg.go.dev/github.com/zeisss/pkg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/zeisss/pkg)](https://goreportcard.com/report/github.com/zeisss/pkg)
 [![Taylor Swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
@@ -14,7 +14,7 @@
 ## Installation
 
 ```bash
-go get github.com/zeisss/pkg
+go get github.com/zeiss/pkg
 ```
 
 Go has a pretty good standard library, but there are some things that are missing. This collection of small packages is meant to fill those gaps.
