@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"log"
-	"os"
 	"time"
 
 	"github.com/zeiss/pkg/server"
@@ -55,6 +54,5 @@ func main() {
 	serverErr := &server.ServerError{}
 	if err := s.Wait(); errors.As(err, &serverErr) {
 		log.Print(err)
-		os.Exit(1)
 	}
 }

@@ -50,10 +50,16 @@ func Broadcast[T any](input <-chan T, outputs ...chan<- T) {
 
 // Drain drains the channel until it is closed.
 func Drain[T any](input <-chan T) {
-	go func() {
-		for range input {
+	if input == nil {
+		return
+	}
+
+	for {
+		_, ok := <-input
+		if !ok {
+			break
 		}
-	}()
+	}
 }
 
 // Filter filters the channel with the given function.
@@ -70,4 +76,35 @@ func Filter[T any](input <-chan T, fn func(T) bool) <-chan T {
 	}()
 
 	return c
+}
+
+// Slice slices the channel into a slice.
+func Slice[T any](ch <-chan any) []T {
+	result := make([]T, 0)
+	for e := range ch {
+		result = append(result, e.(T))
+	}
+
+	return result
+}
+
+// Channel is a helper function to send a slice to a channel.
+func Channel[T any](source []T, in chan any) {
+	for _, e := range source {
+		in <- e
+	}
+}
+
+// Wrap wraps a channel into a typed channel.
+func Wrap[T any](ch chan any) chan T {
+	out := make(chan T)
+
+	go func() {
+		defer close(out)
+		for e := range ch {
+			out <- e.(T)
+		}
+	}()
+
+	return out
 }

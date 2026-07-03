@@ -9,13 +9,12 @@ import (
 )
 
 func TestClean(t *testing.T) {
-	tempDir, err := os.MkdirTemp(os.TempDir(), "empty_test")
-	require.NoError(t, err)
+	tempDir := t.TempDir()
 
 	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	path := filepath.Join(tempDir, "example")
-	err = MkdirAll(path, 0o755)
+	err := MkdirAll(path, 0o755)
 	require.NoError(t, err)
 
 	file, err := os.Create(filepath.Join(tempDir, "example", "test.txt"))

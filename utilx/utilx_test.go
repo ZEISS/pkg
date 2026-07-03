@@ -85,3 +85,52 @@ func TestEmpty(t *testing.T) {
 		require.Equal(t, test.expected, got)
 	}
 }
+
+func TestEqual(t *testing.T) {
+	tests := []struct {
+		a        int
+		b        int
+		expected bool
+	}{
+		{0, 0, true},
+		{1, 1, true},
+		{1, 2, false},
+	}
+
+	for _, test := range tests {
+		got := utilx.Equal(test.a, test.b)
+		require.Equal(t, test.expected, got)
+	}
+}
+
+func TestNotEqual(t *testing.T) {
+	tests := []struct {
+		a        int
+		b        int
+		expected bool
+	}{
+		{0, 0, false},
+		{1, 1, false},
+		{1, 2, true},
+	}
+
+	for _, test := range tests {
+		got := utilx.NotEqual(test.a, test.b)
+		require.Equal(t, test.expected, got)
+	}
+}
+
+func TestIsNil(t *testing.T) {
+	tests := []struct {
+		value    any
+		expected bool
+	}{
+		{nil, true},
+		{1, false},
+	}
+
+	for _, test := range tests {
+		got := utilx.IsNil(test.value)
+		require.Equal(t, test.expected, got)
+	}
+}

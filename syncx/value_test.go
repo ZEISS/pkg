@@ -3,9 +3,10 @@ package syncx_test
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/zeiss/pkg/cast"
 	"github.com/zeiss/pkg/syncx"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestValue(t *testing.T) {

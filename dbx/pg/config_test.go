@@ -1,7 +1,6 @@
 package pg_test
 
 import (
-	"context"
 	"testing"
 
 	"github.com/zeiss/pkg/dbx/pg"
@@ -47,6 +46,6 @@ func TestContext(t *testing.T) {
 		User:     "test_user",
 	}
 
-	ctx := config.Context(context.Background())
+	ctx := config.Context(t.Context())
 	assert.Equal(t, config, pg.FromContext(ctx))
 }

@@ -27,17 +27,23 @@ func FromContext(ctx context.Context) *Config {
 	return ctx.Value(configKey).(*Config)
 }
 
-// Config represents configuration for PostgreSQL connection
+// Config represents configuration for PostgreSQL connection.
 type Config struct {
-	Database string `envconfig:"PG_DB_NAME"`
-	Host     string `envconfig:"PG_HOST"`
+	// Database is the name of the database.
+	Database string `envconfig:"PG_DB"`
+	// Host is the host of the database.
+	Host string `envconfig:"PG_HOST"`
+	// Password is the password of the database.
 	Password string `envconfig:"PG_PASSWORD"`
-	Port     int    `envconfig:"PG_PORT" default:"5432"`
-	SslMode  string `envconfig:"PG_SSL_MODE" default:"disable"`
-	User     string `envconfig:"PG_USER"`
+	// Port is the port of the database.
+	Port int `envconfig:"PG_PORT" default:"5432"`
+	// SslMode is the SSL mode of the database.
+	SslMode string `envconfig:"PG_SSL_MODE" default:"disable"`
+	// User is the user of the database.
+	User string `envconfig:"PG_USER"`
 }
 
-// NewConfig returns a new Config instance
+// NewConfig returns a new Config instance.
 func NewConfig() *Config {
 	return &Config{
 		Port:    5432,

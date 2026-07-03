@@ -3,13 +3,11 @@ package smtp_test
 import (
 	"testing"
 
-	"github.com/katallaxie/pkg/smtp"
 	"github.com/stretchr/testify/assert"
+	"github.com/zeiss/pkg/smtp"
 )
 
 func TestNewStatusCode(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name         string
 		message      string

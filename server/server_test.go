@@ -1,7 +1,6 @@
 package server
 
 import (
-	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -9,7 +8,7 @@ import (
 )
 
 func TestWithContext(t *testing.T) {
-	srv, ctx := WithContext(context.Background())
+	srv, ctx := WithContext(t.Context())
 	assert.Implements(t, (*Server)(nil), srv)
 	assert.NotNil(t, ctx)
 	assert.NotNil(t, srv)
@@ -17,7 +16,7 @@ func TestWithContext(t *testing.T) {
 }
 
 func TestSetLimit(t *testing.T) {
-	srv, ctx := WithContext(context.Background())
+	srv, ctx := WithContext(t.Context())
 	assert.Implements(t, (*Server)(nil), srv)
 	assert.NotNil(t, srv)
 	assert.NotNil(t, ctx)
@@ -27,7 +26,7 @@ func TestSetLimit(t *testing.T) {
 }
 
 func TestSetLimitZero(t *testing.T) {
-	srv, ctx := WithContext(context.Background())
+	srv, ctx := WithContext(t.Context())
 	assert.Implements(t, (*Server)(nil), srv)
 	assert.NotNil(t, srv)
 	assert.NotNil(t, ctx)
@@ -37,7 +36,7 @@ func TestSetLimitZero(t *testing.T) {
 }
 
 func TestSetLimitNegative(t *testing.T) {
-	srv, ctx := WithContext(context.Background())
+	srv, ctx := WithContext(t.Context())
 	assert.Implements(t, (*Server)(nil), srv)
 	assert.NotNil(t, srv)
 	assert.NotNil(t, ctx)
@@ -47,7 +46,7 @@ func TestSetLimitNegative(t *testing.T) {
 }
 
 func TestUnimplemented(t *testing.T) {
-	srv, ctx := WithContext(context.Background())
+	srv, ctx := WithContext(t.Context())
 	assert.Implements(t, (*Server)(nil), srv)
 	assert.NotNil(t, srv)
 	assert.NotNil(t, ctx)
@@ -66,4 +65,7 @@ func TestNewError(t *testing.T) {
 	assert.Implements(t, (*error)(nil), err)
 	require.Error(t, err)
 	require.ErrorIs(t, err, ErrUnimplemented)
+	require.Equal(t, "server: unimplemented", err.Error())
+	require.NotNil(t, err.Unwrap())
+	require.Equal(t, ErrUnimplemented, err.Unwrap())
 }

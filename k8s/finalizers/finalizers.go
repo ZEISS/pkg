@@ -2,12 +2,12 @@ package finalizers
 
 import "github.com/zeiss/pkg/slices"
 
-// Finalizer is an interface that can be used to add, remove and check for
+// Finalizer is an interface that can be used to add, remove and check for.
 type Finalizer interface {
 	GetFinalizers() []string
 }
 
-// AddFinalizer is a helper function to add a finalizer
+// AddFinalizer is a helper function to add a finalizer.
 func AddFinalizer(obj Finalizer, finalizer string) []string {
 	finalizers := obj.GetFinalizers()
 
@@ -20,7 +20,7 @@ func AddFinalizer(obj Finalizer, finalizer string) []string {
 	return slices.Append([]string{finalizer}, finalizers...)
 }
 
-// HasFinalizer is a helper function to check if a finalizer is present
+// HasFinalizer is a helper function to check if a finalizer is present.
 func HasFinalizer(obj Finalizer, finalizer string) bool {
 	finalizers := obj.GetFinalizers()
 
@@ -33,7 +33,7 @@ func HasFinalizer(obj Finalizer, finalizer string) bool {
 	return false
 }
 
-// RemoveFinalizer is a helper function to remove a finalizer
+// RemoveFinalizer is a helper function to remove a finalizer.
 func RemoveFinalizer(obj Finalizer, finalizer string) []string {
 	finalizers := []string{}
 

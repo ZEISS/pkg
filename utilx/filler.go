@@ -5,7 +5,7 @@ import (
 	"reflect"
 )
 
-// FieldData contains the information of a field of a struct
+// FieldData contains the information of a field of a struct.
 type FieldData struct {
 	Field    reflect.StructField
 	Value    reflect.Value
@@ -13,7 +13,7 @@ type FieldData struct {
 	Parent   *FieldData
 }
 
-// FillerFunc is a function that fills a field with a specific
+// FillerFunc is a function that fills a field with a specific.
 type FillerFunc func(field *FieldData)
 
 // Filler contains all the functions to fill any struct field with any type
@@ -38,7 +38,7 @@ func (f *Filler) getFields(variable interface{}) []*FieldData {
 	return f.GetFieldsFromValue(valueObject, nil)
 }
 
-// GetFieldsFromValue returns all the fields of a struct
+// GetFieldsFromValue returns all the fields of a struct.
 func (f *Filler) GetFieldsFromValue(valueObject reflect.Value, parent *FieldData) []*FieldData {
 	typeObject := valueObject.Type()
 
@@ -61,7 +61,7 @@ func (f *Filler) GetFieldsFromValue(valueObject reflect.Value, parent *FieldData
 	return results
 }
 
-// SetDefaultValues sets the default values for all the fields
+// SetDefaultValues sets the default values for all the fields.
 func (f *Filler) SetDefaultValues(fields []*FieldData) {
 	for _, field := range fields {
 		if f.isEmpty(field) {
@@ -70,7 +70,7 @@ func (f *Filler) SetDefaultValues(fields []*FieldData) {
 	}
 }
 
-// nolint: exhaustive
+// nolint:exhaustive
 func (f *Filler) isEmpty(field *FieldData) bool {
 	switch field.Value.Kind() {
 	case reflect.Bool:
@@ -97,7 +97,7 @@ func (f *Filler) isEmpty(field *FieldData) bool {
 	return true // no-op
 }
 
-// SetDefaultValue sets the default value for a field
+// SetDefaultValue sets the default value for a field.
 func (f *Filler) SetDefaultValue(field *FieldData) {
 	getters := []func(field *FieldData) FillerFunc{
 		f.getFunctionByName,
@@ -139,10 +139,10 @@ func (f *Filler) getFunctionByKind(field *FieldData) FillerFunc {
 }
 
 // TypeHash is a string representing a reflect.Type following the next pattern:
-// <package.name>.<type.name>
+// <package.name>.<type.name>.
 type TypeHash string
 
-// GetTypeHash returns the TypeHash for a given reflect.Type
+// GetTypeHash returns the TypeHash for a given reflect.Type.
 func GetTypeHash(t reflect.Type) TypeHash {
 	if t.Kind() == reflect.Ptr {
 		t = t.Elem()

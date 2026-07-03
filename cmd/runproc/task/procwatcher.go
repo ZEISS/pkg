@@ -112,7 +112,6 @@ func (w *ProcessWatcher) watch() {
 	defer t.Stop()
 
 	for {
-
 		select {
 		case <-w.exitCh:
 			return

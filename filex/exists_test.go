@@ -10,8 +10,7 @@ import (
 )
 
 func TestFileExists(t *testing.T) {
-	tempDir, err := os.MkdirTemp(os.TempDir(), "empty_test")
-	require.NoError(t, err)
+	tempDir := t.TempDir()
 
 	defer func() { _ = os.RemoveAll(tempDir) }()
 
@@ -37,9 +36,7 @@ func TestFileExists(t *testing.T) {
 }
 
 func TestFileNotExists(t *testing.T) {
-	tempDir, err := os.MkdirTemp(os.TempDir(), "empty_test")
-	require.NoError(t, err)
-
+	tempDir := t.TempDir()
 	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	path := strings.Join([]string{tempDir, "example.txt"}, "/")

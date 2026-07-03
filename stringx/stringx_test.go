@@ -9,8 +9,6 @@ import (
 )
 
 func TestFirstN(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		s    string
 		n    int
@@ -41,8 +39,6 @@ func TestFirstN(t *testing.T) {
 }
 
 func TestAnyPrefix(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		s        string
 		prefixes []string

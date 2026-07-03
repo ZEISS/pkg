@@ -441,7 +441,6 @@ func hashFinishUnordered(h hash.Hash64, a uint64) uint64 {
 	return h.Sum64()
 }
 
-// visitFlag is used as a bitmask for affecting visit behavior
 type visitFlag uint
 
 const (

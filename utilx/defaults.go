@@ -142,10 +142,9 @@ func parseDateTimeString(data string) string {
 	pattern := regexp.MustCompile(`\{\{(\w+\:(?:-|)\d*,(?:-|)\d*,(?:-|)\d*)\}\}`)
 	matches := pattern.FindAllStringSubmatch(data, -1) // matches is [][]string
 	for _, match := range matches {
-
 		tags := strings.Split(match[1], ":")
-		if len(tags) == 2 {
 
+		if len(tags) == 2 {
 			valueStrings := strings.Split(tags[1], ",")
 			if len(valueStrings) == 3 {
 				var values [3]int
@@ -155,7 +154,6 @@ func parseDateTimeString(data string) string {
 				}
 
 				switch tags[0] {
-
 				case "date":
 					str := time.Now().AddDate(values[0], values[1], values[2]).Format("2006-01-02")
 					data = strings.ReplaceAll(data, match[0], str)
@@ -167,7 +165,6 @@ func parseDateTimeString(data string) string {
 				}
 			}
 		}
-
 	}
 
 	return data

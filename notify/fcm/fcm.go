@@ -8,7 +8,6 @@ import (
 	"github.com/zeiss/pkg/notify"
 
 	"firebase.google.com/go/v4/messaging"
-	"google.golang.org/api/fcm/v1"
 )
 
 var (
@@ -53,7 +52,6 @@ func (f *FCM) Notify(ctx context.Context, title, message string, config ...notif
 		return ErrNoConfig
 	}
 
-	fcm.NewService(ctx)
 	cfg := config[0]
 	if len(cfg.DeviceTokens) == 0 {
 		return ErrNoDeviceTokens

@@ -2,6 +2,7 @@ package reflectx
 
 import "reflect"
 
+// IsEmptyValue checks if a value is empty.
 func IsEmptyValue(v reflect.Value) bool {
 	// nolint:exhaustive
 	switch v.Kind() {

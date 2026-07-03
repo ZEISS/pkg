@@ -24,10 +24,9 @@ func init() {
 	Service.lookup(DefaultEnv...)
 }
 
-// Service is used to configure the
+// Service is used to configure the service name.
 type service struct {
 	name string
-
 	sync.Once
 }
 

@@ -1,7 +1,7 @@
 package smtp
 
 import (
-	"github.com/katallaxie/pkg/ulid"
+	"github.com/zeiss/pkg/ulid"
 )
 
 // Header ...

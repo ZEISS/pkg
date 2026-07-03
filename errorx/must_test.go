@@ -9,8 +9,6 @@ import (
 )
 
 func TestEmpty(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		err      error

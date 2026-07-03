@@ -1,4 +1,4 @@
-package copy
+package copyx
 
 import (
 	"database/sql"
@@ -30,14 +30,14 @@ const (
 	tagMust uint8 = 1 << iota
 	// Indicates that a panic should not occur if a field cannot be copied.
 	tagNoPanic
-	// Ignore the destionaion field
+	// Ignore the destionaion field.
 	tagIgnore
 	// Override the field value if not default value.
 	tagOverride
-	// Has been copied
+	// Has been copied.
 	hasCopied
 
-	// Some default converter types for a nicer syntax
+	// Some default converter types for a nicer syntax.
 	String  string  = ""
 	Bool    bool    = false
 	Int     int     = 0
@@ -158,25 +158,25 @@ type FieldNameMapping struct {
 	Mapping map[string]string
 }
 
-// Tag Flags
+// Tag Flags.
 type flags struct {
 	BitFlags  map[string]uint8
 	SrcNames  tagNameMapping
 	DestNames tagNameMapping
 }
 
-// Field Tag name mapping
+// Field Tag name mapping.
 type tagNameMapping struct {
 	FieldNameToTag map[string]string
 	TagToFieldName map[string]string
 }
 
-// Copy is copying things
+// Copy is copying things.
 func Copy(toValue interface{}, fromValue interface{}) (err error) {
 	return copier(toValue, fromValue, DefaultOpts())
 }
 
-// CopyWithOption copy with option
+// CopyWithOption copy with option.
 func CopyWithOption(toValue interface{}, fromValue interface{}, opts ...Opt) (err error) {
 	options := DefaultOpts()
 	options.Configure(opts...)
@@ -483,6 +483,7 @@ func copier(toValue interface{}, fromValue interface{}, opt *Opts) (err error) {
 					if toField := fieldByName(dest, destFieldName, opt.CaseSensitive); toField.IsValid() && toField.CanSet() {
 						values := fromMethod.Call([]reflect.Value{})
 						if len(values) >= 1 {
+							// nolint:errcheck
 							set(toField, values[0], opt.DeepCopy, converters)
 						}
 					}
@@ -839,7 +840,6 @@ func getFlags(dest, src reflect.Value, toType, fromType reflect.Type) (flags, er
 				flgs.DestNames.FieldNameToTag[field.Name] = name
 				flgs.DestNames.TagToFieldName[name] = field.Name
 			}
-
 		}
 	}
 

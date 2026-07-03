@@ -2,6 +2,7 @@ package filex
 
 import (
 	"bytes"
+	"embed"
 	"fmt"
 	"io"
 	"os"
@@ -29,7 +30,30 @@ func CopyFile(src, dst string, mkdir bool) (int64, error) {
 		}
 	}
 
-	return copy(src, dst)
+	return copy2(src, dst)
+}
+
+// CopyEmbedFile ...
+func CopyEmbedFile(src, dst string, fs embed.FS) (int64, error) {
+	var size int64
+
+	f, err := fs.ReadFile(src)
+	if err != nil {
+		return size, err
+	}
+
+	dest, err := os.Create(filepath.Clean(dst))
+	if err != nil {
+		return size, err
+	}
+	defer dest.Close()
+
+	size, err = io.Copy(dest, bytes.NewReader(f))
+	if err != nil {
+		return size, err
+	}
+
+	return size, nil
 }
 
 // AbsolutePath ...
@@ -105,7 +129,7 @@ func PathTransform(path string, funcs ...Transformer) (string, error) {
 	return p, nil
 }
 
-func copy(src, dst string) (int64, error) {
+func copy2(src, dst string) (int64, error) {
 	sfi, err := os.Stat(src)
 	if err != nil {
 		return 0, err

@@ -9,14 +9,12 @@ import (
 )
 
 func TestMkdirAll(t *testing.T) {
-	tempDir, err := os.MkdirTemp(os.TempDir(), "empty_test")
-	require.NoError(t, err)
-
+	tempDir := t.TempDir()
 	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	path := strings.Join([]string{tempDir, "example"}, "/")
 
-	err = MkdirAll(path, 0o755)
+	err := MkdirAll(path, 0o755)
 	require.NoError(t, err)
 
 	_, err = os.Stat(path)

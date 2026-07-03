@@ -20,14 +20,14 @@ type Integerer interface {
 
 // See: http://en.wikipedia.org/wiki/Binary_prefix
 const (
-	// Decimal
+	// Decimal.
 	KB = 1000
 	MB = 1000 * KB
 	GB = 1000 * MB
 	TB = 1000 * GB
 	PB = 1000 * TB
 
-	// Binary
+	// Binary.
 	KiB = 1024
 	MiB = 1024 * KiB
 	GiB = 1024 * MiB
@@ -112,10 +112,10 @@ func (h HumanSize) ToInt() (int, error) {
 
 // ToInt32 converts the human size to an 32 bit integer.
 func (h HumanSize) ToInt32() (int32, error) {
-	int, err := h.ToInt64()
+	i, err := h.ToInt64()
 	if err != nil {
 		return 0, err
 	}
 
-	return int32(int), nil
+	return int32(i), nil
 }

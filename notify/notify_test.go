@@ -1,7 +1,6 @@
 package notify
 
 import (
-	"context"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -20,7 +19,6 @@ func TestNotify(t *testing.T) {
 	n := New()
 	require.NotNil(t, n)
 
-	ctx := context.Background()
-	err := n.Notify(ctx, "subject", "message")
+	err := n.Notify(t.Context(), "subject", "message")
 	require.NoError(t, err)
 }

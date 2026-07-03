@@ -1,15 +1,15 @@
 package skip_test
 
 import (
-	"context"
 	"testing"
 
-	"github.com/stretchr/testify/require"
 	"github.com/zeiss/pkg/k8s/reconciler/skip"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestSkipEnableSkip(t *testing.T) {
-	ctx := context.Background()
+	ctx := t.Context()
 	ctx = skip.EnableSkip(ctx)
 	require.True(t, skip.Skip(ctx))
 }

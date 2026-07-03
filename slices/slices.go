@@ -1,13 +1,16 @@
 package slices
 
 import (
+	"fmt"
+
 	"github.com/zeiss/pkg/cast"
+	"github.com/zeiss/pkg/utilx"
 )
 
 // Any checks if any element in a slice satisfies a predicate.
 func Any[T any](fn func(v T) bool, slice ...T) bool {
-	for _, v := range slice {
-		if fn(v) {
+	for i := 0; i < len(slice); i++ {
+		if fn(slice[i]) {
 			return true
 		}
 	}
@@ -27,6 +30,7 @@ func Limit[T any](limit int, slice ...T) []T {
 // Map applies a function to all elements in a slice.
 func Map[T1 any, T2 any](fn func(v T1) T2, slice ...T1) []T2 {
 	a := make([]T2, len(slice))
+
 	for i, v := range slice {
 		a[i] = fn(v)
 	}
@@ -48,8 +52,8 @@ func Range(from, to int) []int {
 func Slice[T any](slice []any) []T {
 	newslice := make([]T, 0, len(slice))
 
-	for _, el := range slice {
-		newslice = append(newslice, el.(T)) //nolint:forcetypeassert // We expect a panic, if something is wrong
+	for i := 0; i < len(slice); i++ {
+		newslice = append(newslice, slice[i].(T)) //nolint:forcetypeassert // We expect a panic, if something is wrong
 	}
 
 	return newslice
@@ -158,8 +162,18 @@ func Append[T any](slice []T, elements ...T) []T {
 }
 
 // Len returns the length of a slice.
-func Len[T any](slice []T) int {
-	return len(slice)
+func Len[T any](i int, elements ...T) bool {
+	return len(elements) == i
+}
+
+// GreaterThen checks if the first slice is greater than the second slice.
+func GreaterThen[T any](i int, elements ...T) bool {
+	return len(elements) > i
+}
+
+// LessThen checks if the first slice is less than the second slice.
+func LessThen[T any](i int, elements ...T) bool {
+	return len(elements) < i
 }
 
 // Reverse reverses the order of elements in a slice.
@@ -170,4 +184,56 @@ func Reverse[T any](slice []T) []T {
 	}
 
 	return slice
+}
+
+// ForEach applies a function to all elements in a slice.
+func ForEach[T any](fn func(v T, i int), slice ...T) {
+	for i, v := range slice {
+		fn(v, i)
+	}
+}
+
+// FailForEach applies a function to all elements in a slice and returns an error if the function returns false for any element.
+func FailForEach[T any](fn func(v T, i int) error, slice ...T) error {
+	for i, v := range slice {
+		if err := fn(v, i); utilx.NotEmpty(err) {
+			return err
+		}
+	}
+
+	return nil
+}
+
+// Find returns the first element in a slice that satisfies a predicate.
+func Find[T any](fn func(v T) bool, slice ...T) (T, bool) {
+	for _, v := range slice {
+		if fn(v) {
+			return v, true
+		}
+	}
+
+	var zero T
+	return zero, false
+}
+
+// FindIndex returns the index of the first element in a slice that satisfies a predicate.
+func FindIndex[T any](fn func(v T) bool, slice ...T) (int, bool) {
+	for i, v := range slice {
+		if fn(v) {
+			return i, true
+		}
+	}
+
+	return 0, false
+}
+
+// KeyValue returns a string slice of key-value pairs from a map.
+func KeyValue[K comparable, V any](m map[K]V) []string {
+	result := make([]string, 0, len(m))
+
+	for k, v := range m {
+		result = append(result, fmt.Sprintf("%v=%v", k, v))
+	}
+
+	return result
 }

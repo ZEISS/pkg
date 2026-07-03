@@ -3,14 +3,14 @@ package utilx
 import (
 	"time"
 
-	. "gopkg.in/check.v1"
+	v1 "gopkg.in/check.v1"
 )
 
 // Hook up gocheck into the "go test" runner.
 
 type DefaultsSuite struct{}
 
-var _ = Suite(&DefaultsSuite{})
+var _ = v1.Suite(&DefaultsSuite{})
 
 type Parent struct {
 	Children []Child
@@ -53,7 +53,7 @@ type ExampleBasic struct {
 	HumanSize string `default:"1KiB"`
 }
 
-func (s *DefaultsSuite) TestSetDefaultsBasic(c *C) {
+func (s *DefaultsSuite) TestSetDefaultsBasic(c *v1.C) {
 	foo := &ExampleBasic{}
 	SetDefaults(foo)
 
@@ -64,42 +64,42 @@ type ExampleNested struct {
 	Struct ExampleBasic
 }
 
-func (s *DefaultsSuite) TestSetDefaultsNested(c *C) {
+func (s *DefaultsSuite) TestSetDefaultsNested(c *v1.C) {
 	foo := &ExampleNested{}
 	SetDefaults(foo)
 
 	s.assertTypes(c, &foo.Struct)
 }
 
-func (s *DefaultsSuite) assertTypes(c *C, foo *ExampleBasic) {
-	c.Assert(foo.Bool, Equals, true)
-	c.Assert(foo.Integer, Equals, 33)
-	c.Assert(foo.Integer8, Equals, int8(8))
-	c.Assert(foo.Integer16, Equals, int16(16))
-	c.Assert(foo.Integer32, Equals, int32(32))
-	c.Assert(foo.Integer64, Equals, int64(64))
-	c.Assert(foo.UInteger, Equals, uint(11))
-	c.Assert(foo.UInteger8, Equals, uint8(18))
-	c.Assert(foo.UInteger16, Equals, uint16(116))
-	c.Assert(foo.UInteger32, Equals, uint32(132))
-	c.Assert(foo.UInteger64, Equals, uint64(164))
-	c.Assert(foo.String, Equals, "foo")
-	c.Assert(string(foo.Bytes), Equals, "bar")
-	c.Assert(foo.Float32, Equals, float32(3.2))
-	c.Assert(foo.Float64, Equals, 6.4)
-	c.Assert(foo.Struct.Bool, Equals, true)
-	c.Assert(foo.Duration, Equals, time.Second)
-	c.Assert(foo.Children, IsNil)
-	c.Assert(foo.Second, Equals, time.Second)
-	c.Assert(foo.StringSlice, DeepEquals, []string{"1", "2", "3", "4"})
-	c.Assert(foo.IntSlice, DeepEquals, []int{1, 2, 3, 4})
-	c.Assert(foo.IntSliceSlice, DeepEquals, [][]int{{1}, {2}, {3}, {4}})
-	c.Assert(foo.StringSliceSlice, DeepEquals, [][]string{{"1"}, {}})
-	c.Assert(foo.DateTime, Equals, "2020-08-10 12:55:10")
-	c.Assert(foo.HumanSize, Equals, "1KiB")
+func (s *DefaultsSuite) assertTypes(c *v1.C, foo *ExampleBasic) {
+	c.Assert(foo.Bool, v1.Equals, true)
+	c.Assert(foo.Integer, v1.Equals, 33)
+	c.Assert(foo.Integer8, v1.Equals, int8(8))
+	c.Assert(foo.Integer16, v1.Equals, int16(16))
+	c.Assert(foo.Integer32, v1.Equals, int32(32))
+	c.Assert(foo.Integer64, v1.Equals, int64(64))
+	c.Assert(foo.UInteger, v1.Equals, uint(11))
+	c.Assert(foo.UInteger8, v1.Equals, uint8(18))
+	c.Assert(foo.UInteger16, v1.Equals, uint16(116))
+	c.Assert(foo.UInteger32, v1.Equals, uint32(132))
+	c.Assert(foo.UInteger64, v1.Equals, uint64(164))
+	c.Assert(foo.String, v1.Equals, "foo")
+	c.Assert(string(foo.Bytes), v1.Equals, "bar")
+	c.Assert(foo.Float32, v1.Equals, float32(3.2))
+	c.Assert(foo.Float64, v1.Equals, 6.4)
+	c.Assert(foo.Struct.Bool, v1.Equals, true)
+	c.Assert(foo.Duration, v1.Equals, time.Second)
+	c.Assert(foo.Children, v1.IsNil)
+	c.Assert(foo.Second, v1.Equals, time.Second)
+	c.Assert(foo.StringSlice, v1.DeepEquals, []string{"1", "2", "3", "4"})
+	c.Assert(foo.IntSlice, v1.DeepEquals, []int{1, 2, 3, 4})
+	c.Assert(foo.IntSliceSlice, v1.DeepEquals, [][]int{{1}, {2}, {3}, {4}})
+	c.Assert(foo.StringSliceSlice, v1.DeepEquals, [][]string{{"1"}, {}})
+	c.Assert(foo.DateTime, v1.Equals, "2020-08-10 12:55:10")
+	c.Assert(foo.HumanSize, v1.Equals, "1KiB")
 }
 
-func (s *DefaultsSuite) TestSetDefaultsWithValues(c *C) {
+func (s *DefaultsSuite) TestSetDefaultsWithValues(c *v1.C) {
 	foo := &ExampleBasic{
 		Integer:  55,
 		UInteger: 22,
@@ -111,16 +111,16 @@ func (s *DefaultsSuite) TestSetDefaultsWithValues(c *C) {
 
 	SetDefaults(foo)
 
-	c.Assert(foo.Integer, Equals, 55)
-	c.Assert(foo.UInteger, Equals, uint(22))
-	c.Assert(foo.Float32, Equals, float32(9.9))
-	c.Assert(foo.String, Equals, "bar")
-	c.Assert(string(foo.Bytes), Equals, "foo")
-	c.Assert(foo.Children[0].Age, Equals, 10)
-	c.Assert(foo.Children[1].Age, Equals, 2)
+	c.Assert(foo.Integer, v1.Equals, 55)
+	c.Assert(foo.UInteger, v1.Equals, uint(22))
+	c.Assert(foo.Float32, v1.Equals, float32(9.9))
+	c.Assert(foo.String, v1.Equals, "bar")
+	c.Assert(string(foo.Bytes), v1.Equals, "foo")
+	c.Assert(foo.Children[0].Age, v1.Equals, 10)
+	c.Assert(foo.Children[1].Age, v1.Equals, 2)
 }
 
-func (s *DefaultsSuite) BenchmarkLogic(c *C) {
+func (s *DefaultsSuite) BenchmarkLogic(c *v1.C) {
 	for i := 0; i < c.N; i++ {
 		foo := &ExampleBasic{}
 		SetDefaults(foo)

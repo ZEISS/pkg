@@ -22,7 +22,10 @@ func main() {
 	log.SetFlags(0)
 	log.SetOutput(os.Stderr)
 
-	logx.RedirectStdLog(logx.LogSink)
+	_, err := logx.RedirectStdLog(logx.LogSink)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	f := &flags{}
 

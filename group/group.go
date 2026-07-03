@@ -21,7 +21,7 @@ type Group struct {
 	err     error
 }
 
-// Opt is an option for the routine group
+// Opt is an option for the routine group.
 type Opt func(*Group)
 
 // WithContext uses the provided context for the group.

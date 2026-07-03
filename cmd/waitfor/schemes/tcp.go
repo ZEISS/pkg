@@ -20,7 +20,7 @@ func TCP() WaitFunc {
 			panic("no deadline")
 		}
 
-		c, err := net.DialTimeout("tcp", u.Host, time.Until(d))
+		c, err := net.DialTimeout("tcp", u.Host, time.Until(d)) //nolint:noctx
 		if err != nil {
 			return err
 		}

@@ -15,7 +15,7 @@ func TestPoo(t *testing.T) {
 
 	want := "HELLO"
 
-	var buff *bytes.Buffer = pool.Get()
+	buff := pool.Get()
 	assert.Equal(t, 25, buff.Cap())
 	assert.Equal(t, 0, buff.Len())
 

@@ -8,8 +8,6 @@ import (
 )
 
 func TestHumanSize_ToInt64(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name    string
 		h       unitx.HumanSize
@@ -69,8 +67,6 @@ func TestHumanSize_ToInt64(t *testing.T) {
 }
 
 func TestHumanSize_ToInt(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name    string
 		h       unitx.HumanSize
@@ -130,8 +126,6 @@ func TestHumanSize_ToInt(t *testing.T) {
 }
 
 func TestHumanSize_ToInt32(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name    string
 		h       unitx.HumanSize

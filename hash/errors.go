@@ -4,12 +4,12 @@ import (
 	"fmt"
 )
 
-// ErrNotStringer is returned when there's an error with hash:"string"
+// ErrNotStringer is returned when there's an error with hash:"string".
 type ErrNotStringer struct {
 	Field string
 }
 
-// Error implements error for ErrNotStringer
+// Error implements error for ErrNotStringer.
 func (ens *ErrNotStringer) Error() string {
 	return fmt.Sprintf("hash: %s has hash:\"string\" set, but does not implement fmt.Stringer", ens.Field)
 }

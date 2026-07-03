@@ -1,20 +1,20 @@
 # Pkg
 
-[![Test & Lint](https://github.com/ZEISS/pkg/actions/workflows/main.yml/badge.svg)](https://github.com/ZEISS/pkg/actions/workflows/main.yml)
-[![Go Reference](https://pkg.go.dev/badge/github.com/zeiss/pkg.svg)](https://pkg.go.dev/github.com/zeiss/pkg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/zeiss/pkg)](https://goreportcard.com/report/github.com/zeiss/pkg)
+[![Test & Lint](https://github.com/zeisss/pkg/actions/workflows/main.yml/badge.svg)](https://github.com/zeisss/pkg/actions/workflows/main.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/zeisss/pkg.svg)](https://pkg.go.dev/github.com/zeisss/pkg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/zeisss/pkg)](https://goreportcard.com/report/github.com/zeisss/pkg)
 [![Taylor Swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
 [![Volkswagen](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-`pkg` is a collection of Go packages that make the life of a Go developers at ZEISS easier.
+`pkg` is a collection of Go packages that make the life of a Gopher easier.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ZEISS/pkg?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/zeiss/pkg?quickstart=1)
 
 ## Installation
 
 ```bash
-go get github.com/zeiss/pkg
+go get github.com/zeisss/pkg
 ```
 
 Go has a pretty good standard library, but there are some things that are missing. This collection of small packages is meant to fill those gaps.
@@ -69,6 +69,44 @@ There is the implementation of various operators.
 ```go
 // Is the ternary operator.
 utilx.IfElse(cond, 100, 0)
+```
+
+## Optional
+
+There is also the `Option` type which is a wrapper around a value that can be `nil`.
+
+```go
+// Option is a wrapper around a value that can be nil.
+a := optional.Some(100)
+fmt.Println(a.String()) // true
+```
+
+## Redux-inspired state management
+
+This is a simple state management inspired by [Redux](https://redux.js.org/).
+
+```go
+// FootUpdate is a simple update.
+type FooUpdate struct {}
+
+// NoopState is a simple state of a store.
+type NoopState struct {
+	Name string `json:"name"`
+}
+
+store := redux.New(context.Background(), NoopState{Name: "foo"}, r)
+defer s.Dispose()
+
+state := NoopState{Name: "foo"}
+store := redux.NewStore(context.Background(), State)
+
+action := func() FooUpdate {
+	return "foo"
+}
+
+store.Dispatch(action)
+updates := store.Subscribe()
+
 ```
 
 ## Databases

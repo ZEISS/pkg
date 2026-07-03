@@ -39,7 +39,10 @@ func New(length int) (generator, error) {
 
 	size := length * length * 7
 	b := make([]byte, size)
-	crand.Read(b)
+	_, err := crand.Read(b)
+	if err != nil {
+		return nil, err
+	}
 
 	offset := 0
 	id := make([]byte, length)
@@ -51,7 +54,11 @@ func New(length int) (generator, error) {
 		defer mu.Unlock()
 
 		if offset == size {
-			crand.Read(b)
+			_, err := crand.Read(b)
+			if err != nil {
+				return ""
+			}
+
 			offset = 0
 		}
 
@@ -91,7 +98,11 @@ func Unicode(alphabet string, length int) (generator, error) {
 		defer mu.Unlock()
 
 		for {
-			crand.Read(b)
+			_, err := crand.Read(b)
+			if err != nil {
+				return ""
+			}
+
 			for i := 0; i < step; i++ {
 				idx = int(b[i]) & mask
 				if idx < alphabetLen {

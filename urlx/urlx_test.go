@@ -11,8 +11,6 @@ import (
 )
 
 func TestCopyValues(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		input    string
@@ -49,8 +47,6 @@ func TestCopyValues(t *testing.T) {
 }
 
 func TestMustCopyValues(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		input    string
@@ -86,8 +82,6 @@ func TestMustCopyValues(t *testing.T) {
 }
 
 func TestRemoveQueryValues(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		input    string

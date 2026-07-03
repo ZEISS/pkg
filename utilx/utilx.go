@@ -12,6 +12,26 @@ func NotEmpty[T comparable](value T) bool {
 	return !Empty(value)
 }
 
+// Equal returns true of the given values are equal.
+func Equal[T comparable](a, b T) bool {
+	return IfElse(Empty(a) && Empty(b), true, a == b)
+}
+
+// NotEqual returns true of the given values are not equal.
+func NotEqual[T comparable](a, b T) bool {
+	return !Equal(a, b)
+}
+
+// IsNil returns true of the given value is nil.
+func IsNil(value any) bool {
+	return value == nil
+}
+
+// NotNil returns true of the given value is not nil.
+func NotNil(value any) bool {
+	return !IsNil(value)
+}
+
 // And works similar to "&&" in other languages.
 func And[T comparable](a, b T) T {
 	var c T

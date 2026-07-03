@@ -9,8 +9,6 @@ import (
 )
 
 func TestAny(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name      string
 		predicate func(v int) bool
@@ -39,9 +37,14 @@ func TestAny(t *testing.T) {
 	}
 }
 
-func TestLimit(t *testing.T) {
-	t.Parallel()
+func BenchmarkAny(b *testing.B) {
+	slice := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	for i := 0; i < b.N; i++ {
+		slices.Any(func(v int) bool { return v == 5 }, slice...)
+	}
+}
 
+func TestLimit(t *testing.T) {
 	tests := []struct {
 		name     string
 		limit    int
@@ -65,8 +68,6 @@ func TestLimit(t *testing.T) {
 }
 
 func TestRange(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		from     int
@@ -90,8 +91,6 @@ func TestRange(t *testing.T) {
 }
 
 func TestMap(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		fn       func(v int) int
@@ -115,8 +114,6 @@ func TestMap(t *testing.T) {
 }
 
 func TestPop(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		input    []int
@@ -141,8 +138,6 @@ func TestPop(t *testing.T) {
 }
 
 func TestPush(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		el       int
@@ -166,8 +161,6 @@ func TestPush(t *testing.T) {
 }
 
 func TestCut(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		start    int
@@ -193,8 +186,6 @@ func TestCut(t *testing.T) {
 }
 
 func TestDelete(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		idx      int
@@ -218,8 +209,6 @@ func TestDelete(t *testing.T) {
 }
 
 func TestInsert(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		idx      int
@@ -245,8 +234,6 @@ func TestInsert(t *testing.T) {
 }
 
 func TestFilter(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		input    []int
@@ -270,8 +257,6 @@ func TestFilter(t *testing.T) {
 }
 
 func TestIn(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		el       int
@@ -301,8 +286,6 @@ func TestIn(t *testing.T) {
 }
 
 func TestIndex(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name      string
 		predicate func(v int) bool
@@ -332,8 +315,6 @@ func TestIndex(t *testing.T) {
 }
 
 func TestLast(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name     string
 		input    []int
@@ -355,8 +336,6 @@ func TestLast(t *testing.T) {
 }
 
 func TestUnique(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name      string
 		input     []int
@@ -454,6 +433,142 @@ func TestAppend(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			actual := slices.Append(tt.input, tt.el)
 			assert.Equal(t, tt.expected, actual)
+		})
+	}
+}
+
+func TestForEach(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []int
+		expected []int
+	}{
+		{
+			name:     "for each element in slice",
+			input:    []int{1, 2, 3},
+			expected: []int{2, 3, 4},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			slices.ForEach(func(v int, i int) {
+				tt.input[i] = v + 1
+			}, tt.input...)
+			assert.Equal(t, tt.expected, tt.input)
+		})
+	}
+}
+
+func TestFailForEach(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []int
+		expected error
+	}{
+		{
+			name:     "do not fail for each element",
+			input:    []int{1, 2, 3},
+			expected: nil,
+		},
+		{
+			name:     "fail for each element with error",
+			input:    []int{1, 2, 3},
+			expected: assert.AnError,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			err := slices.FailForEach(func(v int, i int) error {
+				return tt.expected
+			}, tt.input...)
+
+			assert.Equal(t, tt.expected, err)
+		})
+	}
+}
+
+func TestFind(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []int
+		expected int
+		found    bool
+	}{
+		{
+			name:     "find element in slice",
+			input:    []int{1, 2, 3},
+			found:    true,
+			expected: 2,
+		},
+		{
+			name:     "find element not in slice",
+			input:    []int{1, 3},
+			found:    false,
+			expected: 0,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			actual, found := slices.Find(func(v int) bool { return v == 2 }, tt.input...)
+			assert.Equal(t, tt.expected, actual)
+			assert.Equal(t, tt.found, found)
+		})
+	}
+}
+
+func TestFindIndex(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []int
+		expected int
+		found    bool
+	}{
+		{
+			name:     "find index of element in slice",
+			input:    []int{1, 2, 3},
+			expected: 1,
+			found:    true,
+		},
+		{
+			name:     "find index of element not in slice",
+			input:    []int{1, 3},
+			expected: 0,
+			found:    false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			actual, found := slices.FindIndex(func(v int) bool { return v == 2 }, tt.input...)
+			assert.Equal(t, tt.expected, actual)
+			assert.Equal(t, tt.found, found)
+		})
+	}
+}
+
+func TestKeyValue(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    map[string]int
+		expected []string
+	}{
+		{
+			name: "key-value pairs from map",
+			input: map[string]int{
+				"a": 1,
+				"b": 2,
+			},
+			expected: []string{"a=1", "b=2"},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			actual := slices.KeyValue(tt.input)
+			assert.ElementsMatch(t, tt.expected, actual)
 		})
 	}
 }

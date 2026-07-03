@@ -154,7 +154,7 @@ func (p *Process) Kill() {
 }
 
 func (p *Process) run() error {
-	p.cmd = exec.Command("sh", "-ce", p.Command)
+	p.cmd = exec.Command("sh", "-ce", p.Command) //nolint:gosec,noctx
 
 	ptty, tty, err := pty.Open()
 	if err == nil {

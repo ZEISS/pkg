@@ -10,8 +10,7 @@ import (
 )
 
 func TestIsDirEmpty(t *testing.T) {
-	tempDir, err := os.MkdirTemp(os.TempDir(), "empty_test")
-	require.NoError(t, err)
+	tempDir := t.TempDir()
 
 	defer func() { _ = os.RemoveAll(tempDir) }()
 

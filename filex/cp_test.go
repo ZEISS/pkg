@@ -13,8 +13,7 @@ import (
 )
 
 func TestCopyFile(t *testing.T) {
-	tempDir, err := os.MkdirTemp(os.TempDir(), "empty_test")
-	require.NoError(t, err)
+	tempDir := t.TempDir()
 
 	defer func() { _ = os.RemoveAll(tempDir) }()
 
@@ -27,14 +26,14 @@ func TestCopyFile(t *testing.T) {
 	require.NoError(t, err)
 	f.Close()
 
-	new := strings.Join([]string{tempDir, "example_copy.txt"}, "/")
+	newFile := strings.Join([]string{tempDir, "example_copy.txt"}, "/")
 
-	newBytes, err := filex.CopyFile(old, new, false)
+	newBytes, err := filex.CopyFile(old, newFile, false)
 	require.NoError(t, err)
 
 	assert.Equal(t, oldBytes, int(newBytes))
 
-	b, err := os.ReadFile(new)
+	b, err := os.ReadFile(newFile)
 	require.NoError(t, err)
 
 	assert.Equal(t, "Hello World", string(b))
@@ -44,8 +43,7 @@ func TestCopyFileHomeDir(t *testing.T) {
 	sr, err := user.Current()
 	require.NoError(t, err)
 
-	tempDir, err := os.MkdirTemp(sr.HomeDir, "empty_test")
-	require.NoError(t, err)
+	tempDir := t.TempDir()
 
 	defer func() { _ = os.RemoveAll(tempDir) }()
 
@@ -58,23 +56,22 @@ func TestCopyFileHomeDir(t *testing.T) {
 	require.NoError(t, err)
 	f.Close()
 
-	new := strings.Join([]string{tempDir, "example_copy.txt"}, "/")
-	newHomeDir := strings.Replace(new, sr.HomeDir, "~", 1)
+	newFile := strings.Join([]string{tempDir, "example_copy.txt"}, "/")
+	newHomeDir := strings.Replace(newFile, sr.HomeDir, "~", 1)
 
 	newBytes, err := filex.CopyFile(old, newHomeDir, false)
 	require.NoError(t, err)
 
 	assert.Equal(t, oldBytes, int(newBytes))
 
-	b, err := os.ReadFile(new)
+	b, err := os.ReadFile(newFile)
 	require.NoError(t, err)
 
 	assert.Equal(t, "Hello World", string(b))
 }
 
 func TestCopyFileMkdir(t *testing.T) {
-	tempDir, err := os.MkdirTemp(os.TempDir(), "empty_test")
-	require.NoError(t, err)
+	tempDir := t.TempDir()
 
 	defer func() { _ = os.RemoveAll(tempDir) }()
 
@@ -87,14 +84,14 @@ func TestCopyFileMkdir(t *testing.T) {
 	require.NoError(t, err)
 	f.Close()
 
-	new := strings.Join([]string{tempDir, "whoopsy", "example_copy.txt"}, "/")
+	newStr := strings.Join([]string{tempDir, "whoopsy", "example_copy.txt"}, "/")
 
-	newBytes, err := filex.CopyFile(old, new, true)
+	newBytes, err := filex.CopyFile(old, newStr, true)
 	require.NoError(t, err)
 
 	assert.Equal(t, oldBytes, int(newBytes))
 
-	b, err := os.ReadFile(new)
+	b, err := os.ReadFile(newStr)
 	require.NoError(t, err)
 
 	assert.Equal(t, "Hello World", string(b))

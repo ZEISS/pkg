@@ -29,49 +29,34 @@ func NewLogSink() (*zap.Logger, error) {
 type Logger interface {
 	// Log a notice statement
 	Noticef(format string, v ...interface{})
-
 	// Infof is logging an info statement.
 	Infof(format string, v ...interface{})
-
 	// Log a warning statement
 	Warnf(format string, v ...interface{})
-
 	// Log a fatal error
 	Fatalf(format string, v ...interface{})
-
 	// Log an error
 	Errorf(format string, v ...interface{})
-
 	// Log a debug statement
 	Debugf(format string, v ...interface{})
-
 	// Log a trace statement
 	Tracef(format string, v ...interface{})
-
 	// Panicf is logging a panic statement.
 	Panicf(format string, v ...interface{})
-
 	// Printf is logging a printf statement.
 	Printf(format string, v ...interface{})
-
 	// Debugw is logging a debug statement with context.
 	Debugw(msg string, keysAndValues ...interface{})
-
 	// Infow is logging an info statement with context.
 	Infow(msg string, keysAndValues ...interface{})
-
 	// Warnw is logging a warning statement with context.
 	Warnw(msg string, keysAndValues ...interface{})
-
 	// Errorw is logging an error statement with context.
 	Errorw(msg string, keysAndValues ...interface{})
-
 	// DPanicw is logging a debug panic statement with context.
 	DPanicw(msg string, keysAndValues ...interface{})
-
 	// Panicw is logging a panic statement with context.
 	Panicw(msg string, keysAndValues ...interface{})
-
 	// Fatalw is logging a fatal statement with context.
 	Fatalw(msg string, keysAndValues ...interface{})
 }

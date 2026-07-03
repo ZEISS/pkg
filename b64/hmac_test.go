@@ -22,7 +22,7 @@ func TestHmac256(t *testing.T) {
 	t.Parallel()
 
 	message := "test message"
-	secret := "c2VjcmV0"
+	secret := "c2VjcmV0" // nolint:gosec
 
 	hash, err := b64.Hmac256(message, secret)
 	require.NoError(t, err)
