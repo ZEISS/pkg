@@ -221,7 +221,8 @@ func (w *walker) visit(v reflect.Value, opts *visitOpts) (uint64, error) {
 			v := v.MapIndex(k)
 			if includeMap != nil {
 				incl, err := includeMap.HashIncludeMap(
-					opts.StructField, k.Interface(), v.Interface())
+					opts.StructField, k.Interface(), v.Interface(),
+				)
 				if err != nil {
 					return 0, err
 				}
