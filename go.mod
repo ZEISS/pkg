@@ -5,8 +5,8 @@ go 1.26.0
 tool (
 	github.com/golangci/golangci-lint/v2/cmd/golangci-lint
 	github.com/goreleaser/goreleaser
-	github.com/zeiss/pkg/cmd/runproc
 	github.com/vektra/mockery/v2
+	github.com/zeiss/pkg/cmd/runproc
 	gotest.tools/gotestsum
 	mvdan.cc/gofumpt
 )
@@ -424,7 +424,7 @@ require (
 	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/sivchari/containedctx v1.0.3 // indirect
 	github.com/skeema/knownhosts v1.3.0 // indirect
-	github.com/slack-go/slack v0.16.0 // indirect
+	github.com/slack-go/slack v0.23.1 // indirect
 	github.com/sonatard/noctx v0.5.1 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/sourcegraph/go-diff v0.8.0 // indirect
