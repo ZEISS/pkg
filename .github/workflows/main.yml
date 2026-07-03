@@ -19,7 +19,7 @@ jobs:
       checks: write
     strategy:
       matrix:
-        go: [1.25, 1.26]
+        go: [1.26]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-go@v6
@@ -27,7 +27,6 @@ jobs:
           go-version: ${{ matrix.go }}
           cache-dependency-path: |
             go.sum
-            tools/go.sum
       - run: make test
       - uses: dorny/test-reporter@v3
         if: success() || failure()
