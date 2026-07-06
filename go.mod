@@ -34,7 +34,7 @@ require (
 	golang.org/x/sync v0.21.0
 	google.golang.org/protobuf v1.36.12-0.20260120151049-f2248ac996af
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
-	gorm.io/gorm v1.25.9
+	gorm.io/gorm v1.31.2
 	helm.sh/helm v2.17.0+incompatible
 	k8s.io/apimachinery v0.36.2
 	k8s.io/client-go v0.36.2
