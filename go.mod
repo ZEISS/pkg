@@ -15,7 +15,7 @@ replace github.com/dprotaso/go-yit v0.0.0-20260209000607-dfb86291624d => github.
 
 require (
 	charm.land/bubbletea/v2 v2.0.8
-	firebase.google.com/go/v4 v4.20.0
+	firebase.google.com/go/v4 v4.21.0
 	github.com/creack/pty v1.1.24
 	github.com/fatih/color v1.19.0
 	github.com/go-playground/validator/v10 v10.30.3
