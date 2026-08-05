@@ -17,14 +17,17 @@ import (
 // osusergo build tag is used.
 //
 // If needing to do nss lookups, do not disable cgo or set osusergo.
-func Get() string {
-	home, _ := os.UserHomeDir()
+func Get() (string, error) {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return "", err
+	}
 
 	if home == "" && runtime.GOOS != "windows" {
 		if u, err := user.Current(); err == nil {
-			return u.HomeDir
+			return u.HomeDir, nil
 		}
 	}
 
-	return home
+	return home, nil
 }

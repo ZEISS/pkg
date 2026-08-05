@@ -3,15 +3,13 @@ package homedir
 import (
 	"path/filepath"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestGet(t *testing.T) {
-	home := Get()
-	if home == "" {
-		t.Fatal("returned home directory is empty")
-	}
-
-	if !filepath.IsAbs(home) {
-		t.Fatalf("returned path is not absolute: %s", home)
-	}
+	home, err := Get()
+	require.NoError(t, err)
+	require.NotEmpty(t, home)
+	require.True(t, filepath.IsAbs(home))
 }

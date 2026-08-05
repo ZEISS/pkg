@@ -76,10 +76,15 @@ func GetDataHome() (string, error) {
 	if xdgDataHome := os.Getenv("XDG_DATA_HOME"); xdgDataHome != "" {
 		return xdgDataHome, nil
 	}
-	home := Get()
+	home, err := Get()
+	if err != nil {
+		return "", err
+	}
+
 	if home == "" {
 		return "", errors.New("could not get either XDG_DATA_HOME or HOME")
 	}
+
 	return filepath.Join(home, ".local", "share"), nil
 }
 
@@ -92,17 +97,26 @@ func GetConfigHome() (string, error) {
 	if xdgConfigHome := os.Getenv("XDG_CONFIG_HOME"); xdgConfigHome != "" {
 		return xdgConfigHome, nil
 	}
-	home := Get()
+	home, err := Get()
+	if err != nil {
+		return "", err
+	}
+
 	if home == "" {
 		return "", errors.New("could not get either XDG_CONFIG_HOME or HOME")
 	}
+
 	return filepath.Join(home, ".config"), nil
 }
 
 // GetLibHome returns $HOME/.local/lib
 // If HOME is not set, getpwent(3) is consulted to determine the users home directory.
 func GetLibHome() (string, error) {
-	home := Get()
+	home, err := Get()
+	if err != nil {
+		return "", err
+	}
+
 	if home == "" {
 		return "", errors.New("could not get HOME")
 	}
