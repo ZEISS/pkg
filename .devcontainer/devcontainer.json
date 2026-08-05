@@ -8,8 +8,6 @@
       "VARIANT": "ubuntu-22.04",
     },
   },
-  "remoteUser": "root",
-  "containerUser": "vscode",
   "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
   "postCreateCommand": "bash scripts/postCreateCommand.sh",
   "features": {
