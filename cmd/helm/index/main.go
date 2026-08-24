@@ -22,8 +22,6 @@ import (
 )
 
 type flags struct {
-	File    string
-	Version string
 	RepoURL string
 	Index   string
 	Owner   string
@@ -44,8 +42,6 @@ func main() {
 
 	f := &flags{}
 
-	pflag.StringVar(&f.File, "file", f.File, "chart")
-	pflag.StringVar(&f.Version, "version", f.Version, "version")
 	pflag.StringVar(&f.RepoURL, "repo-url", f.RepoURL, "repo url")
 	pflag.StringVar(&f.Index, "index", f.Index, "index (default: index.yaml)")
 	pflag.StringVar(&f.Owner, "owner", f.Owner, "owner")

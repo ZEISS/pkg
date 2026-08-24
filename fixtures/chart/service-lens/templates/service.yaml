@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "service-lens.fullname" . }}
+  labels:
+    {{- include "service-lens.labels" . | nindent 4 }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    {{- if .Values.http.enabled }}
+    - name: http
+      port: {{ (split ":" .Values.http.addr)._1 }}
+      targetPort: http
+      protocol: TCP
+    {{- end }}
+
+  selector:
+    {{- include "service-lens.selectorLabels" . | nindent 4 }}

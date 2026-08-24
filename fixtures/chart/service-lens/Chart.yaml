@@ -1,0 +1,10 @@
+apiVersion: v2
+appVersion: 0.0.0
+description: A helm chart for Service Lens
+name: service-lens
+keywords:
+  - productivity
+version: 0.0.0
+sources:
+  - https://github.com/open-cloud-initiative/service-lens
+home: http://github.com/open-cloud-initiative/service-lens
