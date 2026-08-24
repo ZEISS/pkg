@@ -58,7 +58,7 @@ func (f *FCM) Notify(ctx context.Context, title, message string, config ...notif
 	}
 
 	msg := &messaging.MulticastMessage{
-		Tokens: cfg.DeviceTokens,
+		Fids: cfg.DeviceTokens,
 		Notification: &messaging.Notification{
 			Title: title,
 			Body:  message,
