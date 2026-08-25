@@ -1,4 +1,4 @@
-# Pkg
+# 📦 Pkg
 
 [![Test & Lint](https://github.com/zeiss/pkg/actions/workflows/main.yml/badge.svg)](https://github.com/zeiss/pkg/actions/workflows/main.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/zeiss/pkg.svg)](https://pkg.go.dev/github.com/zeiss/pkg)
