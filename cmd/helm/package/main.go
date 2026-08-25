@@ -48,7 +48,7 @@ func main() {
 		panic(err)
 	}
 
-	err = filex.MkdirAll(f.PackagePath, 0755)
+	err = filex.MkdirAll(f.PackagePath, 0o755)
 	if err != nil {
 		panic(err)
 	}
