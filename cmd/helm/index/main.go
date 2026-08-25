@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"context"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -68,6 +70,7 @@ func main() {
 		for _, asset := range release.Assets {
 			ext := filepath.Ext(cast.Value(asset.Name))
 			name := cast.Value(asset.Name)
+
 			u, err := url.Parse(cast.Value(asset.BrowserDownloadURL))
 			if err != nil {
 				panic(err)
@@ -83,19 +86,27 @@ func main() {
 				if err != nil {
 					panic(err)
 				}
+
+				buf := &bytes.Buffer{}
+				if _, err := io.Copy(buf, resp.Body); err != nil {
+					log.Printf("Failed to send out response: %v", err)
+				}
 				defer resp.Body.Close()
 
-				chart, err := loader.LoadArchive(resp.Body)
+				hashReader := bytes.NewReader(buf.Bytes())
+				hash, err := provenance.Digest(hashReader)
 				if err != nil {
 					panic(err)
 				}
 
-				hash, err := provenance.Digest(resp.Body)
+				bodyReader := bytes.NewReader(buf.Bytes())
+				chart, err := loader.LoadArchive(bodyReader)
 				if err != nil {
 					panic(err)
 				}
 
-				err = indexFile.MustAdd(chart.Metadata, name, cast.Value(asset.BrowserDownloadURL), hash)
+				url := strings.TrimRight(u.String(), name)
+				err = indexFile.MustAdd(chart.Metadata, name, url, hash)
 				if err != nil {
 					panic(err)
 				}
