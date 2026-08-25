@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"text/template"
 	"time"
 
@@ -23,7 +24,6 @@ import (
 type flags struct {
 	PackagePath string
 	Repo        string
-	Owner       string
 	Token       string
 	ReleaseName string
 	Commit      string
@@ -42,11 +42,14 @@ func main() {
 
 	pflag.StringVar(&f.PackagePath, "package-path", f.PackagePath, "package path")
 	pflag.StringVar(&f.Repo, "repo", f.Repo, "repo")
-	pflag.StringVar(&f.Owner, "owner", f.Owner, "owner")
 	pflag.StringVar(&f.Token, "token", f.Token, "token")
 	pflag.StringVar(&f.Commit, "commit", f.Commit, "commit")
 	pflag.StringVar(&f.ReleaseName, "release-name", "{{ .Name }}-{{ .Version }}", "release name")
 	pflag.Parse()
+
+	slices := strings.Split(f.Repo, "/")
+	owner := slices[0]
+	repo := slices[1]
 
 	client, err := github.NewClient(github.WithAuthToken(f.Token))
 	if err != nil {
@@ -90,7 +93,7 @@ func main() {
 			MakeLatest:      cast.Ptr(strconv.FormatBool(true)),
 		}
 
-		release, _, err := client.Repositories.CreateRelease(context.TODO(), f.Owner, f.Repo, req)
+		release, _, err := client.Repositories.CreateRelease(context.TODO(), owner, repo, req)
 		if err != nil {
 			panic(err)
 		}
@@ -106,7 +109,7 @@ func main() {
 		}
 
 		err = retry.Retry(3, 3*time.Second, func() error { //nolint: revive
-			if _, _, err = client.Repositories.UploadReleaseAsset(context.TODO(), f.Owner, f.Repo, release.ID, opts, a); err != nil {
+			if _, _, err = client.Repositories.UploadReleaseAsset(context.TODO(), owner, repo, release.ID, opts, a); err != nil {
 				return err
 			}
 			return nil

@@ -22,10 +22,8 @@ import (
 )
 
 type flags struct {
-	RepoURL string
-	Index   string
-	Owner   string
-	Repo    string
+	Repo  string
+	Index string
 }
 
 func main() {
@@ -42,9 +40,7 @@ func main() {
 
 	f := &flags{}
 
-	pflag.StringVar(&f.RepoURL, "repo-url", f.RepoURL, "repo url")
 	pflag.StringVar(&f.Index, "index", f.Index, "index (default: index.yaml)")
-	pflag.StringVar(&f.Owner, "owner", f.Owner, "owner")
 	pflag.StringVar(&f.Repo, "repo", f.Repo, "repo")
 	pflag.Parse()
 
@@ -59,7 +55,11 @@ func main() {
 		PerPage: 100,
 	}
 
-	releases, _, err := client.Repositories.ListReleases(ctx, f.Owner, f.Repo, opts)
+	slices := strings.Split(f.Repo, "/")
+	owner := slices[0]
+	repo := slices[1]
+
+	releases, _, err := client.Repositories.ListReleases(ctx, owner, repo, opts)
 	if err != nil {
 		panic(err)
 	}
