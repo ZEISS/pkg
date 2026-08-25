@@ -1,8 +1,7 @@
 # Pkg
 
-[![Test & Lint](https://github.com/zeiss/pkg/actions/workflows/main.yml/badge.svg)](https://github.com/zeisss/pkg/actions/workflows/main.yml)
-[![Go Reference](https://pkg.go.dev/badge/github.com/zeisss/pkg.svg)](https://pkg.go.dev/github.com/zeisss/pkg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/zeisss/pkg)](https://goreportcard.com/report/github.com/zeisss/pkg)
+[![Test & Lint](https://github.com/zeiss/pkg/actions/workflows/main.yml/badge.svg)](https://github.com/zeiss/pkg/actions/workflows/main.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/zeiss/pkg.svg)](https://pkg.go.dev/github.com/zeiss/pkg)
 [![Taylor Swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
 [![Volkswagen](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
