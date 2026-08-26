@@ -69,6 +69,10 @@ func main() {
 	}
 
 	for _, release := range releases {
+		if !strings.HasPrefix(cast.Value(release.Name), f.StartsWith) {
+			continue
+		}
+
 		for _, asset := range release.Assets {
 			ext := filepath.Ext(cast.Value(asset.Name))
 			name := cast.Value(asset.Name)
@@ -78,7 +82,7 @@ func main() {
 				panic(err)
 			}
 
-			if strings.HasSuffix(ext, ".tgz") && strings.HasPrefix(name, f.StartsWith) {
+			if strings.HasSuffix(ext, ".tgz") {
 				req := &http.Request{
 					Method: "GET",
 					URL:    u,
