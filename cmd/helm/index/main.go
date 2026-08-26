@@ -24,8 +24,9 @@ import (
 )
 
 type flags struct {
-	Repo  string
-	Index string
+	Repo       string
+	Index      string
+	StartsWith string
 }
 
 func main() {
@@ -44,6 +45,7 @@ func main() {
 
 	pflag.StringVar(&f.Index, "index", f.Index, "index (default: index.yaml)")
 	pflag.StringVar(&f.Repo, "repo", f.Repo, "repo")
+	pflag.StringVar(&f.StartsWith, "starts-with", f.StartsWith, "starts with")
 	pflag.Parse()
 
 	client, err := github.NewClient()
@@ -76,7 +78,7 @@ func main() {
 				panic(err)
 			}
 
-			if strings.HasSuffix(ext, ".tgz") {
+			if strings.HasSuffix(ext, ".tgz") && strings.HasPrefix(name, f.StartsWith) {
 				req := &http.Request{
 					Method: "GET",
 					URL:    u,
