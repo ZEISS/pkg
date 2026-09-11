@@ -24,7 +24,7 @@ require (
 	github.com/gofiber/fiber/v3 v3.5.0
 	github.com/google/go-github/v90 v90.0.0
 	github.com/google/uuid v1.6.0
-	github.com/jackc/pgx/v5 v5.10.0
+	github.com/jackc/pgx/v5 v5.11.0
 	github.com/openfga/go-sdk v0.8.2
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.10
