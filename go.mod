@@ -19,7 +19,7 @@ require (
 	github.com/Songmu/retry v0.1.0
 	github.com/creack/pty v1.1.24
 	github.com/fatih/color v1.19.0
-	github.com/go-playground/validator/v10 v10.30.4
+	github.com/go-playground/validator/v10 v10.30.5
 	github.com/gofiber/fiber/v2 v2.52.15
 	github.com/gofiber/fiber/v3 v3.5.0
 	github.com/google/go-github/v90 v90.0.0
