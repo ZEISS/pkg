@@ -39,7 +39,7 @@ require (
 	gorm.io/gorm v1.31.2
 	helm.sh/helm v2.17.0+incompatible
 	helm.sh/helm/v3 v3.22.0
-	k8s.io/apimachinery v0.37.0
+	k8s.io/apimachinery v0.37.1
 	k8s.io/client-go v0.37.0
 	sigs.k8s.io/controller-runtime v0.25.1
 )
