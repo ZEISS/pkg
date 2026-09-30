@@ -14,8 +14,8 @@ tool (
 replace github.com/dprotaso/go-yit v0.0.0-20260209000607-dfb86291624d => github.com/dprotaso/go-yit v0.0.0-20250513224043-18a80f8f6df4
 
 require (
-	charm.land/bubbletea/v2 v2.0.9
-	firebase.google.com/go/v4 v4.21.0
+	charm.land/bubbletea/v2 v2.0.10
+	firebase.google.com/go/v4 v4.22.0
 	github.com/Songmu/retry v0.1.0
 	github.com/creack/pty v1.1.24
 	github.com/fatih/color v1.19.0
@@ -39,8 +39,8 @@ require (
 	gorm.io/gorm v1.31.2
 	helm.sh/helm v2.17.0+incompatible
 	helm.sh/helm/v3 v3.22.0
-	k8s.io/apimachinery v0.37.0
-	k8s.io/client-go v0.37.0
+	k8s.io/apimachinery v0.37.1
+	k8s.io/client-go v0.37.1
 	sigs.k8s.io/controller-runtime v0.25.1
 )
 
@@ -586,7 +586,7 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/gotestsum v1.13.0 // indirect
 	honnef.co/go/tools v0.8.1 // indirect
-	k8s.io/api v0.37.0 // indirect
+	k8s.io/api v0.37.1 // indirect
 	k8s.io/apiextensions-apiserver v0.37.0 // indirect
 	k8s.io/apiserver v0.37.0 // indirect
 	k8s.io/cli-runtime v0.37.0 // indirect
