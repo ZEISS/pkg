@@ -90,9 +90,9 @@ func (h HumanSize) ToInt64() (int64, error) {
 	case "pb", "pi", "pib":
 		size = num * PiB
 	case "e":
-		size = num * PB
+		size = num * (1000 * PB)
 	case "eb", "ei", "eib":
-		size = num * PiB
+		size = num * (1024 * PiB)
 	default:
 		return 0, fmt.Errorf("expected valid unit, but got '%s'", h)
 	}
