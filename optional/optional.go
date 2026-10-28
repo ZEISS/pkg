@@ -183,10 +183,12 @@ func (o option[T]) MapOrElse(def func() T, next func(T) T) T {
 	return next(o.val)
 }
 
+// Replace stores v and returns the previous option, preserving its presence.
 func (o *option[T]) Replace(v T) Option[T] {
-	old := o.val
+	old := &option[T]{val: o.val, none: o.none}
 	o.val = v
-	return Some(old)
+	o.none = false
+	return old
 }
 
 // String returns the string representation of the option.

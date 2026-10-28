@@ -59,3 +59,31 @@ func TestFilterPresentCallsPredicateOnce(t *testing.T) {
 		}
 	}
 }
+
+func TestReplaceAbsentAndPresent(t *testing.T) {
+	tests := []struct {
+		name            string
+		option          optional.Option[int]
+		replacement     int
+		previousPresent bool
+		previousValue   int
+	}{
+		{"none to value", optional.None[int](), 2, false, 0},
+		{"none to zero", optional.None[int](), 0, false, 0},
+		{"some to value", optional.Some(1), 2, true, 1},
+		{"some zero to value", optional.Some(0), 2, true, 0},
+		{"wrapped none to value", optional.Wrap(7, true), 2, false, 7},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			previous := tt.option.Replace(tt.replacement)
+			assert.Equal(t, tt.previousPresent, previous.IsSome())
+			assert.Equal(t, tt.previousValue, previous.Value())
+			assert.True(t, tt.option.IsSome())
+			assert.Equal(t, tt.replacement, tt.option.UnwrapOr(-1))
+			tt.option.Replace(3)
+			assert.Equal(t, tt.previousPresent, previous.IsSome())
+			assert.Equal(t, tt.previousValue, previous.Value())
+		})
+	}
+}
