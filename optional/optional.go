@@ -109,9 +109,9 @@ func (o option[T]) UnwrapOrElse(f func() T) T {
 	return f()
 }
 
-// And returns the option if it is not None, otherwise returns the given option.
+// And returns None if the option is None, otherwise returns the given option.
 func (o *option[T]) And(v Option[T]) Option[T] {
-	if o.IsNone() || v.IsNone() {
+	if o.IsNone() {
 		return o
 	}
 
@@ -145,7 +145,12 @@ func (o *option[T]) OrElse(next func() Option[T]) Option[T] {
 }
 
 // Filter returns the option if the given predicate returns true, otherwise returns None.
+// The predicate is not called for None.
 func (o *option[T]) Filter(f func(T) bool) Option[T] {
+	if o.IsNone() {
+		return o
+	}
+
 	if f(o.val) {
 		return o
 	}
