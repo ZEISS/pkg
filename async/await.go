@@ -45,10 +45,10 @@ func All[T any](futures ...*Future[T]) *Future[[]T] {
 			go func(future *Future[T], i int) {
 				defer w.Done()
 
-				v, err := future.Await()
-				if err != nil {
+				v, taskErr := future.Await()
+				if taskErr != nil {
 					errOnce.Do(func() {
-						future.err = err
+						err = taskErr
 					})
 					return
 				}
