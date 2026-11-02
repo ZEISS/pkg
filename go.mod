@@ -40,7 +40,7 @@ require (
 	helm.sh/helm v2.17.0+incompatible
 	helm.sh/helm/v3 v3.22.1
 	k8s.io/apimachinery v0.37.2
-	k8s.io/client-go v0.37.1
+	k8s.io/client-go v0.37.2
 	sigs.k8s.io/controller-runtime v0.25.2
 )
 
@@ -586,7 +586,7 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/gotestsum v1.13.0 // indirect
 	honnef.co/go/tools v0.8.1 // indirect
-	k8s.io/api v0.37.1 // indirect
+	k8s.io/api v0.37.2 // indirect
 	k8s.io/apiextensions-apiserver v0.37.1 // indirect
 	k8s.io/apiserver v0.37.1 // indirect
 	k8s.io/cli-runtime v0.37.1 // indirect
