@@ -19,7 +19,7 @@ require (
 	github.com/Songmu/retry v0.1.0
 	github.com/creack/pty v1.1.24
 	github.com/fatih/color v1.19.0
-	github.com/go-playground/validator/v10 v10.30.5
+	github.com/go-playground/validator/v10 v10.30.6
 	github.com/gofiber/fiber/v2 v2.52.16
 	github.com/gofiber/fiber/v3 v3.6.1
 	github.com/google/go-github/v90 v90.0.0
@@ -233,7 +233,7 @@ require (
 	github.com/fsnotify/fsnotify v1.10.1 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.6 // indirect
 	github.com/fzipp/gocyclo v0.6.0 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.15 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.16 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/ghostiam/protogetter v0.3.21 // indirect
 	github.com/github/smimesign v0.2.0 // indirect
@@ -270,8 +270,8 @@ require (
 	github.com/go-openapi/swag/typeutils v0.27.1 // indirect
 	github.com/go-openapi/swag/yamlutils v0.27.1 // indirect
 	github.com/go-openapi/validate v0.25.3 // indirect
-	github.com/go-playground/locales v0.14.1 // indirect
-	github.com/go-playground/universal-translator v0.18.1 // indirect
+	github.com/go-playground/locales v0.14.2 // indirect
+	github.com/go-playground/universal-translator v0.18.2 // indirect
 	github.com/go-restruct/restruct v1.2.0-alpha // indirect
 	github.com/go-toolsmith/astcast v1.1.0 // indirect
 	github.com/go-toolsmith/astcopy v1.1.0 // indirect
