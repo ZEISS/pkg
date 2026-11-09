@@ -27,7 +27,7 @@ require (
 	github.com/jackc/pgx/v5 v5.12.0
 	github.com/openfga/go-sdk v0.8.3
 	github.com/spf13/cobra v1.10.2
-	github.com/spf13/pflag v1.0.10
+	github.com/spf13/pflag v1.1.0
 	github.com/stretchr/testify v1.12.1
 	go.uber.org/goleak v1.3.0
 	go.uber.org/zap v1.28.0
