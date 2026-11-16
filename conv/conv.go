@@ -37,6 +37,8 @@ func Strings[T any](vals ...T) []string {
 }
 
 // Bool returns the boolean representation of the value.
+// Supported numbers are false when zero, and strings are false when empty.
+// Pointers use the pointed-to value; nil pointers and nil are false.
 // nolint:gocyclo
 func Bool(val any) bool {
 	switch val := val.(type) {
@@ -49,13 +51,10 @@ func Bool(val any) bool {
 		// Return actual value
 		return *val
 	case int, int8, int16, int32, int64, uint, uint8, uint16, uint32, uint64, float32, float64:
-		return val != 0
+		return !reflect.ValueOf(val).IsZero()
 	case *int, *int8, *int16, *int32, *int64, *uint, *uint8, *uint16, *uint32, *uint64, *float32, *float64:
-		if val == nil {
-			return false
-		}
-		// Return integer boolean representation
-		return reflect.ValueOf(val).Int() != 0
+		value := reflect.ValueOf(val)
+		return !value.IsNil() && !value.Elem().IsZero()
 	case string:
 		return val != ""
 	case *string:
@@ -63,7 +62,7 @@ func Bool(val any) bool {
 			return false
 		}
 		// Return string boolean representation
-		return reflect.ValueOf(val).String() != ""
+		return *val != ""
 	case nil:
 		return false
 	default:
