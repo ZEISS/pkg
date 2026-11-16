@@ -25,7 +25,7 @@ require (
 	github.com/google/go-github/v90 v90.0.0
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.12.0
-	github.com/openfga/go-sdk v0.8.3
+	github.com/openfga/go-sdk v0.8.4
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.1.0
 	github.com/stretchr/testify v1.12.1
