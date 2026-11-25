@@ -2,39 +2,32 @@ package channels
 
 import "sync"
 
-// Join joins multiple channels into one.
+// Join joins multiple channels into one. The output closes after all inputs are drained.
 func Join[T any](inputs ...<-chan T) <-chan T {
 	c := make(chan T)
-	var once sync.Once
+	var workers sync.WaitGroup
+	workers.Add(len(inputs))
 
 	for _, input := range inputs {
 		go func(input <-chan T) {
-			defer once.Do(func() { close(c) })
+			defer workers.Done()
 			for v := range input {
 				c <- v
 			}
 		}(input)
 	}
 
-	return c
-}
-
-// Merge merges multiple channels into one.
-func Merge[T any](inputs ...<-chan T) <-chan T {
-	c := make(chan T)
-
 	go func() {
-		defer close(c)
-		for _, input := range inputs {
-			go func(input <-chan T) {
-				for v := range input {
-					c <- v
-				}
-			}(input)
-		}
+		workers.Wait()
+		close(c)
 	}()
 
 	return c
+}
+
+// Merge merges multiple channels into one. The output closes after all inputs are drained.
+func Merge[T any](inputs ...<-chan T) <-chan T {
+	return Join(inputs...)
 }
 
 // Broadcast broadcasts a channel to multiple channels.
